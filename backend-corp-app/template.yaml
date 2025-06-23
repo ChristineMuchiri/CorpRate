@@ -18,7 +18,12 @@ Resources:
   CorpRateHttpApi:
     Type: AWS::Serverless::HttpApi
     Properties:
+      StageName: dev
       CorsConfiguration:
+        AllowHeaders: "Content-Type"
+        AllowMethods: "'GET', 'POST'"
+        AllowOrigin: "'*'"
+        MaxAge: "'300'"
       
 
   SubmitReviewFunction:
@@ -29,6 +34,9 @@ Resources:
       Runtime: python3.13
       Architectures:
       - x86_64
+      Environment:
+        Variables:
+          DYNAMODB_TABLE: CorpRateTable
       Events:
         HelloWorld:
           Type: HttpApi # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api

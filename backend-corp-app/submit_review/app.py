@@ -12,7 +12,7 @@ def lambda_handler(event, context):
     created_at = str(datetime.now())
     
     dynamodb = boto3.resource('dynamodb')
-    table = dynamodb.Table('DYNAMODB_TABLE')
+    table = dynamodb.Table('DYNAMODB_TABLE') # type: ignore
     Item = {
         "reviewId": reviewId,
         "company": company,
