@@ -1,0 +1,27 @@
+{
+    "TableName": "CorpRateTable",
+    "KeySchema": [
+        {
+            "AttributeName": "reviewId",
+            "KeyType": "HASH"
+        },
+        {
+            "AttributeName": "company",
+            "KeyType": "RANGE"
+        }
+    ],
+    "AttributeDefinitions": [
+        {
+            "AttributeName": "reviewId",
+            "AttributeType": "S"
+        },
+        {
+            "AttributeName": "company",
+            "AttributeType": "S"        }
+    
+    ],
+    "ProvisionedThroughput": {
+        "ReadCapacityUnits": 5,
+        "WriteCapacityUnits": 5
+    }
+}
