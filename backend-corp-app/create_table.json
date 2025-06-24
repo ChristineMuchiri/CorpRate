@@ -2,21 +2,21 @@
     "TableName": "CorpRateTable",
     "KeySchema": [
         {
-            "AttributeName": "reviewId",
+            "AttributeName": "PK",
             "KeyType": "HASH"
         },
         {
-            "AttributeName": "company",
+            "AttributeName": "SK",
             "KeyType": "RANGE"
         }
     ],
     "AttributeDefinitions": [
         {
-            "AttributeName": "reviewId",
+            "AttributeName": "PK",
             "AttributeType": "S"
         },
         {
-            "AttributeName": "company",
+            "AttributeName": "SK",
             "AttributeType": "S"        }
     
     ],

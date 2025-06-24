@@ -53,7 +53,6 @@ def lambda_handler(event, context):
             'body': json.dumps({"errorMessage": str(e)})
         }
     
-    
     return ({
         "status_code": 200,
         "message": "Review posted successfully"
