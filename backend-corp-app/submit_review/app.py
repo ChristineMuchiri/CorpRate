@@ -19,15 +19,16 @@ def lambda_handler(event, context):
             'body': json.dumps({"errorMessage": "Invalid JSON in request body"})
         }
     
-    reviewId = str(uuid.uuid4())
+    review_id = str(uuid.uuid4())
     company = request_body["Company"]
     review = request_body["Review"]
     rating = request_body["Rating"]
-    created_at = str(datetime.now())
+    created_at = datetime.utcnow().isoformat()
     
     
     new_item = {
-        "reviewId": reviewId,
+        "PK": f"COMPANY#{company}",
+        "SK": f"REVIEW#{review_id}",
         "company": company,
         "review": review,
         "rating": rating,

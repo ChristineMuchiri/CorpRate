@@ -65,13 +65,13 @@ Resources:
    Type: AWS::DynamoDB::Table
    Properties:
     AttributeDefinitions:
-      - AttributeName: "reviewId"
+      - AttributeName: "COMPANY#{company}"
         AttributeType: "S"
-      - AttributeName: "company"
+      - AttributeName: "REVIEW#{reviewId}"
         AttributeType: "S"
     BillingMode: PAY_PER_REQUEST
     KeySchema:
-      - AttributeName: "reviewId"
+      - AttributeName: "COMPANY#{company}"
         KeyType: "HASH"
-      - AttributeName: "company"
+      - AttributeName: "REVIEW#{reviewId}"
         KeyType: "RANGE"
