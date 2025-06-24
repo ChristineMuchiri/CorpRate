@@ -38,11 +38,28 @@ Resources:
         Variables:
           DYNAMODB_TABLE: CorpRateTable
       Events:
-        HelloWorld:
+        CorpRateHttpApi:
           Type: HttpApi # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
           Properties:
             Path: /review
             Method: POST
+  GetReviewsFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: get_reviews/
+      Handler: app.lambda_handler
+      Runtime: python3.13
+      Architectures:
+        - x86_64
+      Environment:
+        Variables:
+          DYNAMODB_TABLE: CorpRateTable
+      Events:
+        CorpRateHttpApi:
+          Type: HttpApi
+          Properties:
+            Path: /review/{Company}
+            Method: GET
 
   CorpRateTable:
    Type: AWS::DynamoDB::Table
