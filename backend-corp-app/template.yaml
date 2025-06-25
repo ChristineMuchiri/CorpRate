@@ -20,10 +20,11 @@ Resources:
     Properties:
       StageName: dev
       CorsConfiguration:
-        AllowHeaders: "Content-Type"
-        AllowMethods: "'GET', 'POST'"
-        AllowOrigin: "'*'"
-        MaxAge: "'300'"
+        AllowHeaders: ["*"]
+        AllowMethods: ["GET", "POST","PUT", "DELETE", "OPTIONS"]
+        AllowOrigin: ["*"]
+        AllowCredentials: true
+        MaxAge: 300
       
 
   SubmitReviewFunction:

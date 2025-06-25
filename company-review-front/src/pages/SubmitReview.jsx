@@ -1,12 +1,18 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 
 function SubmitReview() {
     const [company, setCompany] = useState('');
     const [review, setReview] = useState('');
     const [rating, setRating] = useState('5');
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [error, setError] = useState(null);
+    const [success, setSuccess] = useState(false);
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
+        setIsSubmitting(true);
+        setError(null);
         const reviewData = {
             company,
             review,
@@ -14,16 +20,33 @@ function SubmitReview() {
         };
         console.log('Review Submitted:', reviewData);
 
-        setCompany('');
-        setReview('')
-        setRating('5');
+        try {
+            const localApiUrl = 'http://localhost:3000/review';
 
-        alert('Review submitted! Check console for data.');
+            const response = await axios.post(localApiUrl, reviewData, {
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+            console.log('API Response:', response.data)
+            setSuccess(true);
+            setCompany('');
+            setReview('');
+            setRating('5');
+        } catch (err) {
+            console.error('Error submitting review:', err);
+            setError(err.response?.data?.message || 'Failed to submit review')
+        } finally {
+            setIsSubmitting(false);
+        }
     };
 
     return (
         <div className="submit-container">
             <h2 className="submit-title">Submit a Review</h2>
+            {error && <div className="error-message">{error}</div>}
+            {success && <div className="success-message">Review submitted successfully!</div>}
+            
             <form onSubmit={handleSubmit} className="submit-form">
                 <div className="form-group">
                     <label htmlFor="company">Company Name:</label>
@@ -65,8 +88,12 @@ function SubmitReview() {
                     </select>
                 </div>
 
-                <button type="submit" className="submit-button">
-                    Submit Review
+                <button 
+                    type="submit" 
+                    className="submit-button"
+                    disabled={isSubmitting}
+                >
+                    {isSubmitting ? 'Submitting...' : 'Submit Review'}
                 </button>
             </form>
         </div>
