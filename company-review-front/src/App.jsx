@@ -1,6 +1,7 @@
 import React from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './App.css'
+import Home from './pages/Home'
 import Navbar from './components/Navbar';
 import SubmitReview from './pages/SubmitReview';
 import CompanyReviews from './pages/CompanyReviews';
@@ -14,7 +15,7 @@ function App() {
         <Navbar />
         <main className='main-content'>
           <Routes>
-            <Route path="/" element={<SubmitReview />} />
+            <Route path="/" element={<Home />} />
             <Route path="/submit-review" element={<SubmitReview />} />
             <Route path="/company-reviews" element={<CompanyReviews />} />
           </Routes>
