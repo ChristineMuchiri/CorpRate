@@ -21,7 +21,7 @@ function SubmitReview() {
         console.log('Review Submitted:', reviewData);
 
         try {
-            const localApiUrl = 'http://localhost:3000/review';
+            const localApiUrl = 'http://127.0.0.1:3000/review';
 
             const response = await axios.post(localApiUrl, reviewData, {
                 headers: {
