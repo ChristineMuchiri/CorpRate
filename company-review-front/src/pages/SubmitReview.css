@@ -1,66 +1,113 @@
-.submit-container {
+/* src/pages/SubmitReview.css */
+
+.review-container {
   max-width: 600px;
-  margin: 2rem auto;
-  padding: 2rem;
+  margin: 4rem auto;
   background-color: white;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  border-radius: 10px;
+  padding: 2.5rem;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.07);
+  font-family: system-ui, sans-serif;
+  position: relative;
+  opacity: 0;
+  animation: fadeIn 0.6s ease-out forwards;
 }
 
-.submit-title {
-  font-size: 2rem;
-  font-weight: bold;
-  text-align: center;
-  color: #333;
-  margin-bottom: 1.5rem;
-}
-
-.submit-form {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-}
-
-.form-group {
-  display: flex;
-  flex-direction: column;
-}
-
-.form-group label {
-  margin-bottom: 0.5rem;
-  color: #333;
+.back-button {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  font-size: 0.9rem;
+  color: #2962ff;
+  text-decoration: none;
   font-weight: 600;
 }
 
-.form-group input,
-.form-group textarea,
-.form-group select {
-  padding: 0.75rem 1rem;
+.back-button:hover {
+  text-decoration: underline;
+}
+
+.review-title {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  color: #222;
+}
+
+.review-form {
+  animation: slideIn 0.7s ease-out forwards;
+  transform: translateY(30px);
+  opacity: 0;
+}
+
+.review-form label {
+  display: block;
+  margin-bottom: 1.5rem;
+  color: #333;
+  font-weight: 500;
+}
+
+.review-form input[type="text"],
+.review-form textarea {
+  width: 100%;
+  padding: 12px;
   font-size: 1rem;
-  border-radius: 6px;
   border: 1px solid #ccc;
-  outline: none;
+  border-radius: 6px;
+  margin-top: 0.5rem;
+  resize: vertical;
 }
 
-.form-group input:focus,
-.form-group textarea:focus,
-.form-group select:focus {
-  border-color: #007bff;
-  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.2);
-}
-
-.submit-button {
-  background-color: #007bff;
+.review-form button {
+  background-color: #2962ff;
   color: white;
-  padding: 0.9rem 1.5rem;
+  padding: 12px 20px;
   border: none;
   border-radius: 6px;
   font-size: 1rem;
-  font-weight: bold;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  display: block;
+  width: 100%;
+  margin-top: 1rem;
 }
 
-.submit-button:hover {
-  background-color: #0056b3;
+.review-form button:hover {
+  background-color: #0039cb;
+}
+
+.star-rating {
+  display: flex;
+  gap: 10px;
+  margin-top: 0.5rem;
+  font-size: 1.8rem;
+  cursor: pointer;
+}
+
+.star {
+  color: #ccc;
+  transition: color 0.2s ease;
+}
+
+.star.filled {
+  color: #facc15;
+}
+
+.star:hover,
+.star:hover ~ .star {
+  color: #facc15;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideIn {
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
