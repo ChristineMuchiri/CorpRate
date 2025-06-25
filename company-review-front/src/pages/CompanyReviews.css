@@ -95,3 +95,14 @@
 .star.filled {
   color: #facc15;
 }
+.back-button {
+  display: inline-block;
+  margin-bottom: 1rem;
+  color: #2962ff;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.back-button:hover {
+  text-decoration: underline;
+}

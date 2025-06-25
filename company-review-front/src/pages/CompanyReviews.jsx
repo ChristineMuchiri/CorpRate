@@ -1,7 +1,8 @@
 // src/pages/CompanyReviews.jsx
 import React, { useState } from 'react';
 import { FaStar } from 'react-icons/fa';
-import './CompanyReviews.css'; // Make sure this file exists
+import { Link } from 'react-router-dom'; // ✅ Add this
+import './CompanyReviews.css';
 
 function CompanyReviews() {
   const [searchCompany, setSearchCompany] = useState('');
@@ -18,22 +19,21 @@ function CompanyReviews() {
     }
 
     // Placeholder for future fetch logic
-    // setFilteredReviews(fetchFromBackend(searchCompany));
-    setFilteredReviews([]); // Currently no data
+    setFilteredReviews([]);
   };
 
-  const renderStars = (rating) => {
-    return (
-      <div className="stars">
-        {[...Array(5)].map((_, i) => (
-          <FaStar key={i} className={i < rating ? 'star filled' : 'star'} />
-        ))}
-      </div>
-    );
-  };
+  const renderStars = (rating) => (
+    <div className="stars">
+      {[...Array(5)].map((_, i) => (
+        <FaStar key={i} className={i < rating ? 'star filled' : 'star'} />
+      ))}
+    </div>
+  );
 
   return (
     <div className="review-container">
+      <Link to="/" className="back-button">← Back to Home</Link> {/* ✅ Back button */}
+
       <h2 className="review-title">Company Reviews</h2>
 
       <form onSubmit={handleSearch} className="search-form">
