@@ -71,5 +71,4 @@ function SubmitReview() {
     </div>
   );
 }
-
 export default SubmitReview;
