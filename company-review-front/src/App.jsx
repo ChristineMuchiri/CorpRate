@@ -14,9 +14,11 @@ function App() {
         <main className='main-content'>
           <Routes>
             <Route path="/" element={<SubmitReview />} />
+            <Route path="/submit-review" element={<SubmitReview />} />
+            <Route path="/company-reviews" element={<CompanyReviews />} />
           </Routes>
         </main>
-        
+        {/*Footer can go here*/}
       </div>
     </Router>
   )
