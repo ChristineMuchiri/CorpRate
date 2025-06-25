@@ -20,9 +20,13 @@ Resources:
     Properties:
       StageName: dev
       CorsConfiguration:
-        AllowHeaders: "'Content-Type'"
-        AllowMethods: "'POST, OPTIONS'"
-        AllowOrigins: "'http://localhost:5173'"
+        AllowHeaders:
+          - Content-Type
+        AllowMethods:
+          - POST
+          - OPTIONS
+        AllowOrigins: 
+          - http://localhost:5173
         MaxAge: 300
       
 
@@ -38,11 +42,14 @@ Resources:
         Variables:
           DYNAMODB_TABLE: CorpRateTable
       Events:
-        CorpRateHttpApi:
+        ReviewPostEvent:
           Type: HttpApi # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
           Properties:
             Path: /review
-            Method: POST 
+            Method: POST
+            ApiId: !Ref CorpRateHttpApi
+
+
   GetReviewsFunction:
     Type: AWS::Serverless::Function
     Properties:
@@ -55,11 +62,12 @@ Resources:
         Variables:
           DYNAMODB_TABLE: CorpRateTable
       Events:
-        CorpRateHttpApi:
+        ReviewGetEvent:
           Type: HttpApi
           Properties:
             Path: /review/{Company}
             Method: GET
+            ApiId: !Ref CorpRateHttpApi
 
   CorpRateTable:
    Type: AWS::DynamoDB::Table
