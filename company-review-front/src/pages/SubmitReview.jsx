@@ -4,24 +4,40 @@ import './SubmitReview.css';
 import { Link } from 'react-router-dom';
 
 function SubmitReview() {
-  const [company, setCompany] = useState('');
-  const [review, setReview] = useState('');
-  const [rating, setRating] = useState(0);
+    const API_URL = import.meta.env.VITE_API_URL;
+    const [company, setCompany] = useState('');
+    const [review, setReview] = useState('');
+    const [rating, setRating] = useState(0);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const reviewData = {
-      company,
-      review,
-      rating,
-      date: new Date().toISOString().slice(0, 10),
-    };
-    console.log('Review submitted:', reviewData);
-    alert('Review submitted! Check the console.');
-    setCompany('');
-    setReview('');
-    setRating(0);
-  };
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        const reviewData = {
+            company,
+            review,
+            rating,
+            date: new Date().toISOString().slice(0, 10),
+        };
+    
+        try {
+            const response = await fetch(`${API_URL}/review`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(reviewData)
+            });
+            if (!response.ok) {
+                throw new Error('Failed to submit review');
+            }
+            alert('Review submitted! Check the console.');
+            setCompany('');
+            setReview('');
+            setRating(0);
+    }       catch (error) {
+            console.error('Error submitting review:', error);
+            alert('There was an error submitting the review.');
+    }
+        }
+        
+
 
   return (
     <div className="review-container fade-in">
