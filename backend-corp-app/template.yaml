@@ -19,6 +19,7 @@ Resources:
     Type: AWS::Serverless::HttpApi
     Properties:
       StageName: dev
+      Name: CorpRateHttpApi
       CorsConfiguration:
         AllowHeaders:
           - Content-Type
@@ -28,11 +29,27 @@ Resources:
         AllowOrigins: 
           - http://localhost:5173
         MaxAge: 300
-      
+
+  CorpRateTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: CorpRateTable
+      AttributeDefinitions:
+        - AttributeName: "PK"
+          AttributeType: "S"
+        - AttributeName: "SK"
+          AttributeType: "S"
+      BillingMode: PAY_PER_REQUEST
+      KeySchema:
+        - AttributeName: "PK"
+          KeyType: "HASH"
+        - AttributeName: "SK"
+          KeyType: "RANGE"    
 
   SubmitReviewFunction:
     Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
     Properties:
+      FunctionName: SubmitReviewFunction
       CodeUri: submit_review/
       Handler: app.lambda_handler
       Runtime: python3.13
@@ -42,7 +59,7 @@ Resources:
         Variables:
           DYNAMODB_TABLE: CorpRateTable
       Events:
-        ReviewPostEvent:
+        SubmitReviewApiEvent:
           Type: HttpApi # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
           Properties:
             Path: /review
@@ -53,6 +70,7 @@ Resources:
   GetReviewsFunction:
     Type: AWS::Serverless::Function
     Properties:
+      FunctionName: GetReviewsFunction
       CodeUri: get_reviews/
       Handler: app.lambda_handler
       Runtime: python3.13
@@ -62,24 +80,15 @@ Resources:
         Variables:
           DYNAMODB_TABLE: CorpRateTable
       Events:
-        ReviewGetEvent:
+        ReviewGetApiEvent:
           Type: HttpApi
           Properties:
             Path: /review/{Company}
             Method: GET
             ApiId: !Ref CorpRateHttpApi
 
-  CorpRateTable:
-   Type: AWS::DynamoDB::Table
-   Properties:
-    AttributeDefinitions:
-      - AttributeName: "COMPANY#{company}"
-        AttributeType: "S"
-      - AttributeName: "REVIEW#{reviewId}"
-        AttributeType: "S"
-    BillingMode: PAY_PER_REQUEST
-    KeySchema:
-      - AttributeName: "COMPANY#{company}"
-        KeyType: "HASH"
-      - AttributeName: "REVIEW#{reviewId}"
-        KeyType: "RANGE"
+  
+Outputs:
+  ApiUrl:
+   Description: "API Gateway endpoint URL"
+   Value: !Sub "https://${CorpRateHttpApi}.execute-api.${AWS::Region}.amazonaws.com/dev"

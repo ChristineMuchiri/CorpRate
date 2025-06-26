@@ -5,7 +5,7 @@ from datetime import datetime
 import os
 
 
-dynamodb = boto3.resource('dynamodb', endpoint_url='http://dynamodb-local:8000')
+dynamodb = boto3.resource('dynamodb')
 table_name = os.environ.get('DYNAMODB_TABLE')
 table = dynamodb.Table(table_name) # type: ignore
 
@@ -20,9 +20,9 @@ def lambda_handler(event, context):
         }
     
     review_id = str(uuid.uuid4())
-    company = request_body["Company"]
-    review = request_body["Review"]
-    rating = request_body["Rating"]
+    company = request_body["company"]
+    review = request_body["review"]
+    rating = request_body["rating"]
     created_at = datetime.utcnow().isoformat()
     
     
