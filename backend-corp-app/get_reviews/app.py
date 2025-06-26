@@ -5,7 +5,7 @@ import os
 #dynamodb = boto3.resource('dynamodb', endpoint_url='http://dynamodb-local:8000')
 table_name = os.environ.get('DYNAMODB_TABLE')
 #table = dynamodb.Table(table_name) # type: ignore
-client = boto3.client('dynamodb', endpoint_url='http://dynamodb-local:8000')
+client = boto3.client('dynamodb')
 
 def lambda_handler(event, context):
     try:
