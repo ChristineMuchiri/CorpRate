@@ -21,15 +21,24 @@ function CompanyReviews() {
     setFilteredReviews([]);
 
     if (searchCompany.trim() === '') {
-      setFilteredReviews([]);
+      setError("Please enter a company name to search");
+      //setFilteredReviews([]);
       return;
     }
 
     setLoading(true);
 
     try {
-      const apiUrl = `${API_URL}/${searchCompany.trim()}`;
+      const encodedCompanyName = encodeURIComponent(searchCompany.trim());
+      const apiUrl = `${API_URL}/${encodedCompanyName}`;
+      console.log('Making request to:', apiUrl);
+
       const response = await fetch(apiUrl);
+
+      // --- Start of Debugging Logs ---
+    console.log('API Response Status:', response.status);
+    console.log('API Response Headers:', response.headers);
+    // --- End of Debugging Logs ---
 
       if (!response.ok) {
         const errorData = await response.json();
@@ -37,6 +46,19 @@ function CompanyReviews() {
       }
 
       const data = await response.json();
+      console.log('Api response Data:', data);
+
+      // --- Crucial Debugging Logs ---
+    console.log('Parsed API Data (before map):', data);
+    console.log('Type of Parsed API Data:', typeof data);
+    console.log('Is Parsed API Data an Array?', Array.isArray(data));
+      // --- End of Debugging Logs ---
+      // Add a robust check here before mapping
+    if (!Array.isArray(data)) {
+        console.error("Expected 'data' to be an array but received:", data);
+        setError("Unexpected response format from server. Please try again or contact support.");
+        return; // Stop execution here if data is not an array
+    }
 
       const parsedReviews = data.map(item => {
         const parsedItem = {};
@@ -118,10 +140,10 @@ function CompanyReviews() {
                 <h3>{review.companyName || searchCompany}</h3>
                 {review.rating && renderStars(review.rating)}
                 <p className="review-text">
-                  "{review.reviewText || review.Comment || 'No review text provided.'}"
+                  "{review.reviewText || review.review || 'No review text provided.'}"
                 </p>
                 <p className="review-date">
-                  Reviewed on: {review.Date || review.reviewDate || 'N/A'}
+                  Reviewed on: {review.Date || review.created_at || 'N/A'}
                 </p>
                 {review.user_id && <p className="reviewer">By: {review.user_id}</p>}
               </div>
