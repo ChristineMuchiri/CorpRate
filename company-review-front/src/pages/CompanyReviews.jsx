@@ -1,7 +1,7 @@
 // src/pages/CompanyReviews.jsx
 import React, { useState } from 'react';
 import { FaStar } from 'react-icons/fa';
-import { Link, useNavigate} from 'react-router-dom'; 
+import { Link } from 'react-router-dom'; 
 import './CompanyReviews.css';
 
 function CompanyReviews() {
@@ -9,12 +9,13 @@ function CompanyReviews() {
   const [searchCompany, setSearchCompany] = useState('');
   const [filteredReviews, setFilteredReviews] = useState([]);
   const [hasSearched, setHasSearched] = useState(false);
-  const [, setLoading] = useState(false);
-  const [, setError] = useState(null);
-  const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+
 
   const handleSearch = async (e) => {
     e.preventDefault();
+
     setHasSearched(true);
     setError(null);
     setFilteredReviews([]);
@@ -48,8 +49,9 @@ function CompanyReviews() {
         }
         return parsedItem;
       });
+
       setFilteredReviews(parsedReviews);
-      navigate(`/${searchCompany.trim()}`);
+
 
     } catch (error) {
       console.error("Error fetching reviews:", error);
@@ -70,7 +72,7 @@ function CompanyReviews() {
 
   return (
     <div className="review-container">
-      <Link to="/" className="back-button">← Back to Home</Link> {/* ✅ Back button */}
+      <Link to="/" className="back-button">← Back to Home</Link>
 
       <h2 className="review-title">Company Reviews</h2>
 
@@ -81,33 +83,53 @@ function CompanyReviews() {
           onChange={(e) => setSearchCompany(e.target.value)}
           placeholder="Enter company name to search..."
         />
-        <button type="submit">Search Reviews</button>
+        <button type="submit" disabled={loading}>
+          {loading ? 'Searching...' : 'Search Reviews'}
+        </button>
       </form>
 
-      {hasSearched && filteredReviews.length === 0 && searchCompany.trim() !== '' && (
+      {loading && <p className="message">Loading reviews...</p>}
+      {error && <p className="error-message">Error: {error}</p>}
+
+      {!loading && !error && hasSearched && filteredReviews.length === 0 && searchCompany.trim() !== '' && (
         <p className="message">No reviews found for "{searchCompany}".</p>
       )}
 
-      {hasSearched && searchCompany.trim() === '' && (
+      {!loading && !error && hasSearched && searchCompany.trim() === '' && (
         <p className="message">Please enter a company name to search for reviews.</p>
       )}
 
-      {!hasSearched && (
+      {!loading && !error && !hasSearched && (
         <p className="message">Enter a company name above to view reviews.</p>
       )}
 
-      {filteredReviews.length > 0 && (
+      {!loading && !error && filteredReviews.length > 0 && (
         <div className="review-grid">
-          {filteredReviews.map((review) => (
-            <div key={review.id} className="review-card">
-              <h3>{review.company}</h3>
-              {renderStars(review.rating)}
-              <p className="review-text">"{review.reviewText}"</p>
-              <p className="review-date">Reviewed on: {review.date}</p>
-            </div>
-          ))}
+          {filteredReviews.map((review, index) => {
+            const isReview = review.SK && review.SK.startsWith('REVIEW#');
+            // const isCompanyMetadata = review.SK && review.SK.startsWith('METADATA#'); // Not strictly needed if filtering
+
+            if (!isReview) {
+              return null;
+            }
+
+            return (
+              <div key={review.SK || review.PK + index} className="review-card">
+                <h3>{review.companyName || searchCompany}</h3>
+                {review.rating && renderStars(review.rating)}
+                <p className="review-text">
+                  "{review.reviewText || review.Comment || 'No review text provided.'}"
+                </p>
+                <p className="review-date">
+                  Reviewed on: {review.Date || review.reviewDate || 'N/A'}
+                </p>
+                {review.user_id && <p className="reviewer">By: {review.user_id}</p>}
+              </div>
+            );
+          })}
         </div>
       )}
+      
     </div>
   );
 }

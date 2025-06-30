@@ -26,6 +26,7 @@ Resources:
         AllowMethods:
           - POST
           - OPTIONS
+          - GET
         AllowOrigins: 
           - http://localhost:5173
         MaxAge: 300
@@ -83,7 +84,7 @@ Resources:
         ReviewGetApiEvent:
           Type: HttpApi
           Properties:
-            Path: /review/{Company}
+            Path: /{Company}
             Method: GET
             ApiId: !Ref CorpRateHttpApi
 
