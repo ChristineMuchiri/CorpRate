@@ -2,9 +2,9 @@
 
 .home-container {
   text-align: center;
-  padding: 4rem 1rem;
+  padding: 3rem;
   background-color: #f5f9ff;
-  min-height: 100vh;
+  border-radius: 5%;
 }
 
 .home-header {

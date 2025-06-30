@@ -8,9 +8,12 @@ function SubmitReview() {
     const [company, setCompany] = useState('');
     const [review, setReview] = useState('');
     const [rating, setRating] = useState(0);
+    const [message, setMessage] = useState(null);
 
     const handleSubmit = async (e) => {
-        e.preventDefault();
+      e.preventDefault();
+      
+      setMessage(null)
         const reviewData = {
             company,
             review,
@@ -26,8 +29,9 @@ function SubmitReview() {
             });
             if (!response.ok) {
                 throw new Error('Failed to submit review');
-            }
-            alert('Review submitted! Check the console.');
+          }
+          setMessage({ text: 'Review submitted successfully!', type: 'success' });
+          setTimeout(() => { setMessage(null); }, 5000);
             setCompany('');
             setReview('');
             setRating(0);
@@ -42,6 +46,13 @@ function SubmitReview() {
   return (
     <div className="review-container fade-in">
       <Link to="/" className="back-button">← Back to Home</Link>
+      {message && (
+        <div className={`submission-message ${message.type}`}>
+          <p>{message.text}</p>
+          {message.type === 'success'}
+          </div>
+      )}
+          
 
       <h2 className="review-title">Submit a Review</h2>
       <form onSubmit={handleSubmit} className="review-form slide-in">
