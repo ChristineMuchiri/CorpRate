@@ -1,25 +1,63 @@
 // src/pages/CompanyReviews.jsx
 import React, { useState } from 'react';
 import { FaStar } from 'react-icons/fa';
-import { Link } from 'react-router-dom'; // ✅ Add this
+import { Link, useNavigate} from 'react-router-dom'; 
 import './CompanyReviews.css';
 
 function CompanyReviews() {
+  const API_URL = import.meta.env.VITE_API_URL;
   const [searchCompany, setSearchCompany] = useState('');
   const [filteredReviews, setFilteredReviews] = useState([]);
   const [hasSearched, setHasSearched] = useState(false);
+  const [, setLoading] = useState(false);
+  const [, setError] = useState(null);
+  const navigate = useNavigate();
 
-  const handleSearch = (e) => {
+  const handleSearch = async (e) => {
     e.preventDefault();
     setHasSearched(true);
+    setError(null);
+    setFilteredReviews([]);
 
     if (searchCompany.trim() === '') {
       setFilteredReviews([]);
       return;
     }
 
-    // Placeholder for future fetch logic
-    setFilteredReviews([]);
+    setLoading(true);
+
+    try {
+      const apiUrl = `${API_URL}/${searchCompany.trim()}`;
+      const response = await fetch(apiUrl);
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.errorMessage || `HTTP error! status: ${response.status}`);
+      }
+
+      const data = await response.json();
+
+      const parsedReviews = data.map(item => {
+        const parsedItem = {};
+        for (const key in item) {
+          if (item[key].S) {
+            parsedItem[key] = item[key].S;
+          } else if (item[key].N) {
+            parsedItem[key] = parseFloat(item[key].N);
+          }
+        }
+        return parsedItem;
+      });
+      setFilteredReviews(parsedReviews);
+      navigate(`/${searchCompany.trim()}`);
+
+    } catch (error) {
+      console.error("Error fetching reviews:", error);
+      setError(error.message); // Set the error message to display
+      setFilteredReviews([]); // Ensure no old reviews are shown on error
+    } finally {
+      setLoading(false); // Set loading to false after fetch
+    }
   };
 
   const renderStars = (rating) => (

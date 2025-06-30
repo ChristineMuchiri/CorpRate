@@ -9,7 +9,8 @@ client = boto3.client('dynamodb')
 
 def lambda_handler(event, context):
     try:
-        company_name = event.get('pathParameters', {}.get('company'))
+        path_parameters = event.get('pathParameters', {})
+        company_name = path_parameters.get('company')
         
         if not company_name:
             return {
