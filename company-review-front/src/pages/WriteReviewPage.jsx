@@ -98,4 +98,4 @@ function WriteReviewPage() {
     </div>
   );
 }
-export default SubmitReview;
+export default WriteReviewPage;

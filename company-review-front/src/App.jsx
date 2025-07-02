@@ -4,6 +4,7 @@ import './App.css'
 import LandingPage from './pages/LandingPage'
 import WriteReviewPage from './pages/WriteReviewPage';
 import CompanyReviews from './pages/CompanyReviews';
+import Reviews from './pages/Reviews';
 
 
 function App() {
@@ -15,7 +16,8 @@ function App() {
           <Routes>
             <Route path="/" element={<LandingPage />} />
             <Route path="/write-review" element={<WriteReviewPage />} />
-            <Route path="/reviews" element={<CompanyReviews />} />
+            <Route path="/reviews" element={<Reviews />} />
+            <Route path="/companies" element={<CompanyReviews/>} />
           </Routes>
         </main>
         {/*Footer can go here*/}

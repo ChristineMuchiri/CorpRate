@@ -3,28 +3,124 @@ import React from 'react';
 import './LandingPage.css';
 import { Link } from 'react-router-dom';
 
-function LandingPage() {
+function LandingPage(){
   return (
-    <div className="landing-container">
-      <header className="landing-header">
-        <h1 className="logo">CorpRate</h1>
-        <nav>
-          <Link to="/reviews">Reviews</Link>
-          <Link to="/write-review">Write Review</Link>
-          <Link to="/companies">CompanyReviews</Link>
+    <div className="landing-page">
+      {/* Header */}
+      <header className="page-header">
+        <div className="logo-container">
+          <span className="logo-text">WorkReviews</span>
+        </div>
+        <nav className="nav-links">
+          <Link to="/companies" className="nav-link">Companies</Link>
+          <Link to="/reviews" className="nav-link">Reviews</Link>
+          <Link to="/write-review" className="nav-link">Write Review</Link>
         </nav>
-      </header>
+      </header> 
 
-      <section className="hero">
-        <h2>Discover Your Next Dream Job</h2>
-        <p>Get honest, anonymous insights about company culture, management, and work-life balance from real employess. Make informed career decisions.</p>
-        <div className="hero-buttons">
-          <button>Submit a Review</button>
-          <button>Explore Companies</button>
+      {/* Hero Section */} 
+      <section className="hero-section">
+        <h1>Discover Your Next Dream Job</h1>
+        <p className="hero-text">
+          Get honest, anonymous insights about company culture, management, and work-life balance from real employees. 
+          Make informed career decisions.
+        </p>
+        
+        <div className="search-container">
+          <div className="search-area">
+          <input 
+            type="text" 
+            placeholder="Search companies (e.g. Google, Microsoft, SharepXYZ...)" 
+            className="search-input"
+          />
+          </div>
+          <button className="search-button">Explore Companies</button>
         </div>
       </section>
+
+      {/* Stats Section */}
+      <section className="stats-section">
+        <h2>Explore Companies</h2>
+        <div className="stats-grid">
+          <div className="stat-item">
+            <h3>10K+</h3>
+            <p>Active Users</p>
+          </div>
+          <div className="stat-item">
+            <h3>2.5K+</h3>
+            <p>Reviews Posted</p>
+          </div>
+          <div className="stat-item">
+            <h3>500+</h3>
+            <p>Companies Listed</p>
+          </div>
+          <div className="stat-item">
+            <h3>85%</h3>
+            <p>Verified Reviews</p>
+          </div>
+        </div>
+      </section>
+
+      {/* Featured Companies Section */}
+
+      <section className="featured-companies">
+        <h2>Featured Companies</h2>
+        <div className="companies-grid">
+          <div className="company-card">
+            <h3>TschCorp</h3>
+            <div className="company-rating">42</div>
+            <p className="review-count">156 reviews</p>
+          </div>
+          <div className="company-card">
+            <h3>StartupXYZ</h3>
+            <div className="company-rating">38</div>
+            <p className="review-count">89 reviews</p>
+          </div>
+          <div className="company-card">
+            <h3>Meg4Corp</h3>
+            <div className="company-rating">35</div>
+            <p className="review-count">234 reviews</p>
+          </div>
+          <div className="company-card">
+            <h3>InnovateLab</h3>
+            <div className="company-rating">45</div>
+            <p className="review-count">67 reviews</p>
+          </div>
+        </div>
+      </section>
+
+      {/* Middle Section - Share Experience */}
+      <section className="share-experience">
+        <div className="share-content">
+          <h2>Share Your Experience</h2>
+          <p className="share-description">
+            Help others make better career choices by sharing your honest review about your workplace. 
+            Your identity remains anonymous, but your insights are invaluable.
+          </p>
+          <button className="review-button">Write a Review</button>
+        </div>
+      </section>
+
+      
+      {/* Footer */}
+      <footer className="page-footer">
+        <div className='reviews-footer'>
+          <span className="footer-text">CorpRate</span>
+        </div>
+          <p className="footer-description">
+            Empowering job seekers with honest, anonymous workplace insights. Building transparency in the job market, one revoew at a time.</p>  
+        <div className="footer-links">
+          <a href="/about">About Us</a>
+          <a href="/privacy">Privacy Policy</a>
+          <a href="/terms">Terms of Service</a>
+          <a href="/contact">Contact</a>
+        </div>
+        <div className="footer-copyright">
+          &copy; {new Date().getFullYear()} WorkReviews. All rights reserved.
+        </div>
+      </footer>
     </div>
   );
 }
 
-export default Home;
+export default LandingPage;
