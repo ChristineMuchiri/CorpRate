@@ -1,135 +1,222 @@
-/* src/pages/SubmitReview.css */
-
+/* Container */
 .review-container {
-  max-width: 600px;
-  margin: 4rem auto;
-  background-color: white;
-  padding: 2.5rem;
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 40px;
+  background-color: #f4f9ff; /* Light blue background */
   border-radius: 12px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.07);
-  font-family: system-ui, sans-serif;
-  position: relative;
-  opacity: 0;
-  animation: fadeIn 0.6s ease-out forwards;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
+  font-family: 'Segoe UI', sans-serif;
 }
 
-.back-button {
-  position: absolute;
-  top: 1rem;
-  left: 1rem;
-  font-size: 0.9rem;
-  color: #2962ff;
-  text-decoration: none;
-  font-weight: 600;
+/* Animations (optional) */
+.fade-in {
+  animation: fadeIn 0.6s ease-in;
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+.slide-in {
+  animation: slideIn 0.4s ease-in;
+}
+@keyframes slideIn {
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
 }
 
-.back-button:hover {
-  text-decoration: underline;
-}
-
+/* Header */
 .review-title {
-  text-align: center;
-  font-size: 2rem;
-  margin-bottom: 2rem;
-  color: #222;
+  font-size: 28px;
+  color: #1e2a38;
+  margin-bottom: 10px;
+}
+.review-intro {
+  font-size: 16px;
+  margin-bottom: 30px;
+  color: #555;
 }
 
-.review-form {
-  animation: slideIn 0.7s ease-out forwards;
-  transform: translateY(30px);
-  opacity: 0;
+/* Form Styling */
+.review-form section {
+  background-color: #ffffff;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  margin-bottom: 32px;
+  border: 1px solid #e0e0e0;
 }
 
 .review-form label {
   display: block;
-  margin-bottom: 1.5rem;
-  color: #333;
   font-weight: 500;
+  color: #1e2a38;
+  margin-bottom: 10px;
 }
 
 .review-form input[type="text"],
+.review-form input[type="range"],
 .review-form textarea {
   width: 100%;
   padding: 12px;
-  font-size: 1rem;
+  font-size: 15px;
+  border-radius: 6px;
   border: 1px solid #ccc;
-  border-radius: 6px;
-  margin-top: 0.5rem;
-  resize: vertical;
+  margin-bottom: 20px;
+  box-sizing: border-box;
 }
 
-.review-form button {
-  background-color: #2962ff;
-  color: white;
-  padding: 12px 20px;
-  border: none;
-  border-radius: 6px;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  display: block;
-  width: 100%;
-  margin-top: 1rem;
+.review-form input[type="range"] {
+  padding: 0;
 }
-
-.review-form button:hover {
-  background-color: #0039cb;
+.review-form section h3,
+.review-form section h2 {
+  margin-bottom: 20px;
+  color: #1e2a38;
 }
-
-.star-rating {
+/* Rating Row */
+.rating-row {
   display: flex;
-  gap: 10px;
-  margin-top: 0.5rem;
-  font-size: 1.8rem;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+.rating-row label {
+  flex: 2;
+}
+.rating-value {
+  flex: 1;
+  font-weight: bold;
+  color: #0077cc;
+}
+
+/* Inline Questions */
+.inline-question {
+  margin-bottom: 20px;
+}
+.inline-options {
+  display: flex;
+  gap: 24px;
+  margin-top: 6px;
+}
+.inline-options label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 15px;
+}
+
+/* Submit Button */
+button[type="submit"] {
+  background-color: #0077cc;
+  color: white;
+  font-size: 16px;
+  padding: 14px 28px;
+  border: none;
+  border-radius: 8px;
   cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+button[type="submit"]:hover {
+  background-color: #005fa3;
+}
+
+/* Back Link */
+.back-button {
+  display: inline-block;
+  margin-bottom: 20px;
+  text-decoration: none;
+  color: #0077cc;
+  font-weight: bold;
+}
+
+/* Success Message */
+.submission-message.success {
+  background-color: #d1f7d6;
+  padding: 16px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  color: #226633;
+  border: 1px solid #b2e0b8;
+}
+.submit-button-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+button[disabled] {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.spinner {
+  width: 20px;
+  height: 20px;
+  border: 3px solid #fff;
+  border-top: 3px solid #0077cc;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  margin: 0 auto;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+.star-rating-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 24px;
+  justify-content: space-between;
+}
+
+.category-label {
+  flex: 1;
+  font-weight: 500;
+  color: #1e2a38;
+}
+
+.star-rating-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 24px;
+  justify-content: space-between;
+}
+
+.category-label {
+  flex: 1;
+  font-weight: 500;
+  color: #1e2a38;
+}
+
+.star-group {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex: 1;
+  justify-content: flex-end;
 }
 
 .star {
+  font-size: 24px;
   color: #ccc;
+  cursor: pointer;
   transition: color 0.2s ease;
 }
 
 .star.filled {
-  color: #facc15;
+  color: #f5b301;
 }
 
 .star:hover,
 .star:hover ~ .star {
-  color: #facc15;
+  color: #f0c244;
 }
 
-/* Animations */
-@keyframes fadeIn {
-  to {
-    opacity: 1;
-  }
+.star-label {
+  margin-left: 12px;
+  font-size: 14px;
+  color: #555;
 }
 
-@keyframes slideIn {
-  to {
-    transform: translateY(0);
-    opacity: 1;
-  }
-}
-.submission-message {
-  padding: 15px 20px;
-  margin: 20px auto; /* Centers it horizontally with some top/bottom margin */
-  border-radius: 8px;
-  font-weight: bold;
-  text-align: center;
-  max-width: 500px; /* Limit width for better readability */
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  transition: opacity 0.3s ease-in-out; /* For smooth fade-out */
-  opacity: 1; /* Default opacity */
-}
-
-.submission-message p {
-  margin: 0; /* Remove default paragraph margin */
-  line-height: 1.5;
-}
-
-.submission-message.success {
-  background-color: #d4edda; /* Light green */
-  color: #155724; /* Dark green text */
-  border: 1px solid #c3e6cb;
-}
