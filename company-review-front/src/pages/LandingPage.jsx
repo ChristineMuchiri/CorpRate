@@ -8,14 +8,17 @@ function LandingPage(){
     <div className="landing-page">
       {/* Header */}
       <header className="page-header">
+        <div className="header-container">
         <div className="logo-container">
-          <span className="logo-text">WorkReviews</span>
-        </div>
+          <span className="logo-text">CorpRate</span>
+          </div>
         <nav className="nav-links">
           <Link to="/companies" className="nav-link">Companies</Link>
           <Link to="/reviews" className="nav-link">Reviews</Link>
           <Link to="/write-review" className="nav-link">Write Review</Link>
         </nav>
+        </div>
+      
       </header> 
 
       {/* Hero Section */} 
@@ -108,7 +111,7 @@ function LandingPage(){
           <span className="footer-text">CorpRate</span>
         </div>
           <p className="footer-description">
-            Empowering job seekers with honest, anonymous workplace insights. Building transparency in the job market, one revoew at a time.</p>  
+            Empowering job seekers with honest, anonymous workplace insights. Building transparency in the job market, one review at a time.</p>  
         <div className="footer-links">
           <a href="/about">About Us</a>
           <a href="/privacy">Privacy Policy</a>

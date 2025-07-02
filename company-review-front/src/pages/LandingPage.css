@@ -11,7 +11,7 @@ body, html {
   height: 100%;
   overflow-y: auto;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #f9f9f9;
+  background-color: #eef6fb;
   color: #333;
 }
 /* Container */
@@ -21,21 +21,41 @@ body, html {
 
 /* Header */
 .page-header {
+  background-color: whitesmoke;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 20px 0;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  transition: box-shadow 0.3s ease;
+  border-bottom: 1px solid #d0dce5;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
-
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-width: 1000px;
+  
+  margin: 0 auto;
+  padding: 0 20px;
+  flex-wrap: wrap;
+}
 .logo-text {
   font-size: 28px;
   font-weight: bold;
-  color: #2c3e50;
+  
 }
 
 .nav-links {
   display: flex;
   gap: 20px;
+  color: white;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-top: 10px;
 }
 
 .nav-link {
@@ -46,12 +66,14 @@ body, html {
 
 .nav-link:hover {
   color: #0077cc;
+  text-decoration: underline;
 }
 
 /* Hero Section */
 .hero-section {
+  
   text-align: center;
-  margin: 60px 0;
+  margin: 60px 20px;
 }
 
 .hero-section h1 {
@@ -83,22 +105,32 @@ body, html {
 }
 
 .search-button {
-  padding: 12px 20px;
+  padding: 14px 28px;
+  font-size: 12px;
+  font-weight: 600;
   background-color: #0077cc;
   color: white;
   border: none;
-  border-radius: 6px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 119, 204, 0.3);
+  transition: background-color 0.3s ease, transform 0.2s ease;
   cursor: pointer;
 }
 
 .search-button:hover {
   background-color: #005fa3;
+  transform: translateY(-2px);
 }
-
+.search-button:active {
+  background-color: #004a87;
+  transform: translateY(0);
+}
 /* Stats Section */
 .stats-section {
   margin: 60px 0;
   text-align: center;
+  
+  
 }
 
 .stats-section h2 {
@@ -162,9 +194,12 @@ body, html {
 
 /* Share Experience Section */
 .share-experience {
-  background-color: #eef6fb;
+  background-color: white;
   padding: 60px 20px;
   text-align: center;
+  border-radius: 30px;
+  margin: 30px auto;
+  max-width: 50%;
 }
 
 .share-content h2 {
@@ -180,48 +215,39 @@ body, html {
 }
 
 .review-button {
-  padding: 12px 24px;
+  padding: 14px 28px;
+  font-size: 16px;
+  font-weight: 600;
   background-color: #0077cc;
   color: white;
   border: none;
-  border-radius: 6px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 119, 204, 0.3);
+  transition: background-color 0.3s ease, transform 0.2s ease;
   cursor: pointer;
 }
 
 .review-button:hover {
   background-color: #005fa3;
-}
-
-/* Brand Mission */
-.brand-section {
-  padding: 40px 0;
-  text-align: center;
-}
-
-.brand-section h3 {
-  font-size: 24px;
-  color: #2c3e50;
-}
-
-.brand-mission {
-  font-size: 16px;
-  max-width: 600px;
-  margin: 10px auto;
-  color: #666;
+  transform: translateY(-2px);
 }
 
 /* Footer */
 .page-footer {
-  background-color: #f0f0f0;
+  background-color: #150737;
   padding: 40px 20px;
   text-align: center;
   margin-top: 60px;
+}
+.review-button:active {
+  background-color: #004a87;
+  transform: translateY(0);
 }
 
 .reviews-footer .footer-text {
   font-size: 20px;
   font-weight: bold;
-  color: #2c3e50;
+  color: #f4f6f8;
 }
 
 .footer-description {
@@ -249,4 +275,9 @@ body, html {
 .footer-copyright {
   font-size: 12px;
   color: #aaa;
+}
+@media (max-width: 768px) {
+  .share-experience {
+    max-width: 80%;
+  }
 }
