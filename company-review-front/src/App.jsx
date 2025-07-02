@@ -1,8 +1,8 @@
 import React from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './App.css'
-import Home from './pages/Home'
-import SubmitReview from './pages/SubmitReview';
+import LandingPage from './pages/LandingPage'
+import WriteReviewPage from './pages/WriteReviewPage';
 import CompanyReviews from './pages/CompanyReviews';
 
 
@@ -13,9 +13,9 @@ function App() {
       <div className='app-container'>
         <main className='main-content'>
           <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/submit-review" element={<SubmitReview />} />
-            <Route path="/company-reviews" element={<CompanyReviews />} />
+            <Route path="/" element={<LandingPage />} />
+            <Route path="/write-review" element={<WriteReviewPage />} />
+            <Route path="/reviews" element={<CompanyReviews />} />
           </Routes>
         </main>
         {/*Footer can go here*/}

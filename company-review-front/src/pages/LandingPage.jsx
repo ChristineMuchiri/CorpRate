@@ -9,14 +9,15 @@ function LandingPage() {
       <header className="landing-header">
         <h1 className="logo">CorpRate</h1>
         <nav>
-          <a href="#submit">Submit Review</a>
-          <a href="#browse">Browse Companies</a>
+          <Link to="/reviews">Reviews</Link>
+          <Link to="/write-review">Write Review</Link>
+          <Link to="/companies">CompanyReviews</Link>
         </nav>
       </header>
 
       <section className="hero">
-        <h2>Where Work Speaks</h2>
-        <p>Honest reviews about workplace culture, from real employees.</p>
+        <h2>Discover Your Next Dream Job</h2>
+        <p>Get honest, anonymous insights about company culture, management, and work-life balance from real employess. Make informed career decisions.</p>
         <div className="hero-buttons">
           <button>Submit a Review</button>
           <button>Explore Companies</button>
