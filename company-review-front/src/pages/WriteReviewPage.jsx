@@ -15,7 +15,7 @@ const categories = [
 const ratingLabels = ["Poor", "Fair", "Good", "Very Good", "Excellent"];
 
 function WriteReviewPage() {
-    const API_URL = import.meta.env.VITE_API_URL;
+    const API_URL = import.meta.env.VITE_API_BASE_URL;
 
     const [companyName, setCompanyName] = useState('');
     const [location, setLocation] = useState('');
@@ -48,11 +48,11 @@ function WriteReviewPage() {
       setLoading(true);
 
         const reviewData = {
-            companyName,
+            companyName: companyName.trim().toLowerCase(),
             jobTitle,
             department,
             jobDuration,
-            location,
+            location: location.trim().toLowerCase(),
             pros,
             cons,
             advice,
@@ -64,7 +64,7 @@ function WriteReviewPage() {
         };
     
         try {
-            const response = await fetch(`${API_URL}/review`, {
+            const response = await fetch(`${API_URL}/submit-review`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(reviewData)
@@ -86,6 +86,7 @@ function WriteReviewPage() {
           setAdvice('');
           setRecommendation('');
           setEmploymentStatus('');
+          setLoading(false);
           setRatings(Object.fromEntries(categories.map((cat) => [cat, 3])));
     }       catch (error) {
             console.error('Error submitting review:', error);
@@ -117,8 +118,8 @@ function WriteReviewPage() {
             Company Name *
             <input
               type="text"
-              value={companyName.trim().toLowerCase()}
-              onChange={(e) => setcompanyName(e.target.value)}
+              value={companyName}
+              onChange={(e) => setCompanyName(e.target.value)}
               required
               placeholder="e.g. Safaricom, Google"
             />
@@ -155,7 +156,7 @@ function WriteReviewPage() {
             Location
             <input
               type="text"
-              value={location.trim().toLowerCase()}
+              value={location}
               onChange={(e) => setLocation(e.target.value)}
               placeholder="e.g. Nairobi, Mombasa"
             />
