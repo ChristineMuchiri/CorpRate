@@ -60,6 +60,7 @@ function WriteReviewPage() {
             employmentStatus,
             ratings,
             date: new Date().toISOString().slice(0, 10),
+            timestamp: Date.now(),
         };
     
         try {
@@ -116,7 +117,7 @@ function WriteReviewPage() {
             Company Name *
             <input
               type="text"
-              value={companyName}
+              value={companyName.trim().toLowerCase()}
               onChange={(e) => setcompanyName(e.target.value)}
               required
               placeholder="e.g. Safaricom, Google"
@@ -154,7 +155,7 @@ function WriteReviewPage() {
             Location
             <input
               type="text"
-              value={location}
+              value={location.trim().toLowerCase()}
               onChange={(e) => setLocation(e.target.value)}
               placeholder="e.g. Nairobi, Mombasa"
             />

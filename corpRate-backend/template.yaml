@@ -1,0 +1,76 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  corpRate-backend
+
+  Sample SAM Template for corpRate-backend
+
+
+Globals:
+  Function:
+    Timeout: 3
+    MemorySize: 128
+    
+    LoggingConfig:
+      LogFormat: JSON
+Resources:
+# HttpApi
+  CorpRateHttpApi:
+    Type: AWS::Serverless::HttpApi
+    Properties:
+      StageName: dev
+      Name: CorpRateHttpApi
+      CorsConfiguration:
+        AllowHeaders:
+          - Content-Type
+        AllowMethods:
+          - POST
+          - OPTIONS
+          - GET
+        AllowOrigins: 
+          - http://localhost:5173
+        MaxAge: 300
+# DynamoDB Table
+  CorpRateTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: CorpRateTable
+      AttributeDefinitions:
+        - AttributeName: "PK"
+          AttributeType: "S"
+        - AttributeName: "SK"
+          AttributeType: "S"
+      BillingMode: PAY_PER_REQUEST
+      KeySchema:
+        - AttributeName: "PK"
+          KeyType: "HASH"
+        - AttributeName: "SK"
+          KeyType: "RANGE"
+# SubmitReviewFunction
+  SubmitReviewFunction:
+    Type: AWS::Serverless::Function 
+    Properties:
+      CodeUri: submitReview/
+      Handler: app.lambda_handler
+      Runtime: python3.13
+      FunctionName: SubmitReviewFunction
+      Architectures:
+      - x86_64
+      Environment:
+        Variables:
+          TABLE_NAME: !Ref CorpRateTable
+      Events:
+        SubmitReviewApiEvent:
+          Type: HttpApi 
+          Properties:
+            Path: /submit-review
+            Method: POST
+            ApiId: !Ref CorpRateHttpApi
+
+Outputs:
+  
+  CorpRateHttpApiUrl:
+    Description: API Gateway endpoint URL for Prod stage for Hello World 
+      function
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/dev"
+  
