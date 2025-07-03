@@ -18,6 +18,7 @@ function WriteReviewPage() {
     const API_URL = import.meta.env.VITE_API_URL;
 
     const [companyName, setCompanyName] = useState('');
+    const [location, setLocation] = useState('');
     const [jobTitle, setJobTitle] = useState('');
     const [department, setDepartment] = useState('');
     const [jobDuration, setJobDuration] = useState('');
@@ -51,6 +52,7 @@ function WriteReviewPage() {
             jobTitle,
             department,
             jobDuration,
+            location,
             pros,
             cons,
             advice,
@@ -77,6 +79,7 @@ function WriteReviewPage() {
           setJobTitle('');
           setDepartment('');
           setJobDuration('');
+          setLocation('');
           setPros('');
           setCons('');
           setAdvice('');
@@ -144,6 +147,16 @@ function WriteReviewPage() {
               value={jobDuration}
               onChange={(e) => setJobDuration(e.target.value)}
               placeholder="e.g. 2 years, 6 months"
+            />
+          </label>
+        
+        <label>
+            Location
+            <input
+              type="text"
+              value={location}
+              onChange={(e) => setLocation(e.target.value)}
+              placeholder="e.g. Nairobi, Mombasa"
             />
           </label>
         </section>
