@@ -238,6 +238,7 @@ function WriteReviewPage() {
           type="radio"
           name="recommendation"
           value="yes"
+          checked={recommendation === 'yes'}
           onChange={(e) => setRecommendation(e.target.value)}
           required
         />
@@ -247,6 +248,7 @@ function WriteReviewPage() {
         <input
           type="radio"
           name="recommendation"
+          checked={recommendation === 'no'}
           value="no"
           onChange={(e) => setRecommendation(e.target.value)}
         />
@@ -266,6 +268,7 @@ function WriteReviewPage() {
           type="radio"
           name="employmentStatus"
           value="current"
+          checked={employmentStatus === 'current'}
           onChange={(e) => setEmploymentStatus(e.target.value)}
           required
         />
@@ -276,6 +279,7 @@ function WriteReviewPage() {
           type="radio"
           name="employmentStatus"
           value="former"
+          checked={employmentStatus === 'former'}
           onChange={(e) => setEmploymentStatus(e.target.value)}
         />
         Former
