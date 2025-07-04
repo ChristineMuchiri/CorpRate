@@ -66,6 +66,28 @@ Resources:
             Path: /submit-review
             Method: POST
             ApiId: !Ref CorpRateHttpApi
+# GetCompanyReviewsFunction
+  GetLatestReviewsFunction:
+    Type: AWS::Serverless::Function 
+    Properties:
+      CodeUri: getCompanyReviews/
+      Handler: app.lambda_handler
+      Runtime: python3.13
+      FunctionName: GetCompanyReviewsFunction
+      Architectures:
+      - x86_64
+      Environment:
+        Variables:
+          TABLE_NAME: !Ref CorpRateTable
+      Events:
+        GetLatestReviewsApiEvent:
+          Type: HttpApi 
+          Properties:
+            Path: /companies/{companyName}/reviews
+            Method: GET
+            ApiId: !Ref CorpRateHttpApi
+      Policies:
+        - AmazonDynamoDBReadOnlyAccess
 
 Outputs:
   
