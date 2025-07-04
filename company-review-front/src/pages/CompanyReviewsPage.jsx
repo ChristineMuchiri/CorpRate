@@ -45,7 +45,7 @@ function CompanyReviewsPage() {
 
     return (
      
-     <div className="company-reviews-page">
+     <div className="company-reviews-page-container">
     <h2>Reviews for {titleCase(companyName)}</h2>
       <Link to="/" className="back-button">← Back to Home</Link>
       <div className="company-summary-card">
@@ -103,11 +103,7 @@ function CompanyReviewsPage() {
             <p>{review.cons}</p>
           </div>
 
-          <div className="review-footer">
-            <span className="helpful">👍 Helpful ({review.helpfulCount || 12})</span>
-            <span className="flag">Flag Review</span>
-            <button className="view-company-button">View Company</button>
-          </div>
+          
         </div>
       ))
     ) : (

@@ -113,7 +113,8 @@ function LandingPage(){
             Help others make better career choices by sharing your honest review about your workplace. 
             Your identity remains anonymous, but your insights are invaluable.
           </p>
-          <button className="review-button">Write a Review</button>
+          <button className="review-button"
+                  onClick={() => navigate('/write-review')}>Write a Review</button>
         </div>
       </section>
 
