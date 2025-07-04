@@ -1,9 +1,20 @@
 // src/pages/LandingPage.jsx
-import React from 'react';
+import {React, useState} from 'react';
 import './LandingPage.css';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 function LandingPage(){
+  const [searchTerm, setSearchTerm] = useState('');
+  const navigate = useNavigate();
+
+  const handleSearch = () => {
+    if (searchTerm.trim() !== '') {
+
+      navigate(`/companies/${searchTerm.toLowerCase()}/reviews`);
+    } else {
+      navigate('/');
+    }
+  }
   return (
     <div className="landing-page">
       {/* Header */}
@@ -33,11 +44,13 @@ function LandingPage(){
           <div className="search-area">
           <input 
             type="text" 
-            placeholder="Search companies (e.g. Google, Microsoft, SharepXYZ...)" 
+            placeholder="Search companies (e.g. Google, Microsoft, Safaricom...)" 
             className="search-input"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
           />
           </div>
-          <button className="search-button">Explore Companies</button>
+          <button className="search-button" onClick={handleSearch}>Explore Companies</button>
         </div>
       </section>
 

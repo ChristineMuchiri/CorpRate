@@ -92,7 +92,7 @@ Resources:
 Outputs:
   
   CorpRateHttpApiUrl:
-    Description: API Gateway endpoint URL for Prod stage for Hello World 
+    Description: API Gateway endpoint URL for dev stage for corpRate-backend 
       function
     Value: !Sub "https://${CorpRateHttpApi}.execute-api.${AWS::Region}.amazonaws.com/dev"
   

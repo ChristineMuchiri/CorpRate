@@ -9,4 +9,13 @@ manifest_hash = ""
 packagetype = "Zip"
 functions = ["SubmitReviewFunction"]
 
+[function_build_definitions.944e4f83-90e7-4a9c-8be5-e05a02235c3f]
+codeuri = "C:\\Users\\Kabaruku\\Documents\\Projects\\CorpRate\\corpRate-backend\\getCompanyReviews"
+runtime = "python3.13"
+architecture = "x86_64"
+handler = "app.lambda_handler"
+manifest_hash = ""
+packagetype = "Zip"
+functions = ["GetLatestReviewsFunction"]
+
 [layer_build_definitions]
