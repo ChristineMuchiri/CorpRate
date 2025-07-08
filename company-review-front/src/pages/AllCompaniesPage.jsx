@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { Link} from 'react-router-dom'; 
+import { Link } from 'react-router-dom'; 
 import './AllCompaniesPage.css'
 import { titleCase } from '../utils.js';
-import { Star, StarHalf, StarOff } from 'lucide-react';
+import { Star, StarHalf, StarOff, Users } from 'lucide-react';
 
 export default function AllCompaniesPage() {
     const API_URL = import.meta.env.VITE_API_BASE_URL;
@@ -13,6 +13,13 @@ export default function AllCompaniesPage() {
     const fullStars = Math.round(rating);
     return '★'.repeat(fullStars) + '☆'.repeat(5 - fullStars);
     };
+
+    const getInitials = (name) => {
+  return name
+    .split(' ')
+    .map(word => word.charAt(0).toUpperCase())
+    .join('');
+};
 
     
   useEffect(() => {
@@ -25,7 +32,7 @@ export default function AllCompaniesPage() {
         }
 
         const data = await response.json();
-        
+        console.log(data)
         // Handle both direct array response and potential stringified body
         let companiesData = Array.isArray(data) ? data : [];
         
@@ -72,7 +79,11 @@ export default function AllCompaniesPage() {
       <div className="companies-grid">
         {companies.map((company, index) => (
           <div key={index} className="company-card">
-            <h2>{titleCase(company.companyName)}</h2>
+                <h2>
+                    <span className='company-initials'>{getInitials(company.companyName)}</span>
+                    <span className='company-name'>{titleCase(company.companyName)}</span>
+
+                    </h2>
             
             <div className="company-rating">
               <span className="overall-rating" style={{ color: '#f5c518', fontSize: '1.2rem' }}>
@@ -80,7 +91,8 @@ export default function AllCompaniesPage() {
                 <span style={{ marginLeft: '6px', color: '#333' }}>
                 {company.averageRatings['Overall Rating'].toFixed(1)}
                 </span>
-                </span>
+                    </span>
+                    <span className='review-count'><Users size={15}/> {company.reviewCount} reviews</span>
             </div>
             
             <div className="rating-details">
