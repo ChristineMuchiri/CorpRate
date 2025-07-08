@@ -1,5 +1,6 @@
 // src/pages/CompanyReviews.jsx
-import React, { useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
+import { ThumbsUp, ThumbsDown, MessageSquare, MapPin, Calendar } from "lucide-react";
 import { Link, useParams} from 'react-router-dom'; 
 import './CompanyReviewsPage.css';
 import { titleCase } from '../utils.js'; 
@@ -9,7 +10,7 @@ function CompanyReviewsPage() {
   const { companyName } = useParams();
   const [reviews, setReviews] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [averageRating, setAverageRating] = useState(0); // Default average rating
+  const [, setAverageRating] = useState(0); // Default average rating
   const [recommendPercentage, setRecommendPercentage] = useState(0); // Default recommend percentage
 
   useEffect(() => {
@@ -45,9 +46,13 @@ function CompanyReviewsPage() {
 
     return (
      
-     <div className="company-reviews-page-container">
+      <div className="company-reviews-page-container">
+        <div className='review-header-bar'>
+        <Link to="/" className="back-button">← Back to Home</Link>
+          <Link to="/write-review" className="review-button">Write Review</Link>
+          </div>
     <h2>Reviews for {titleCase(companyName)}</h2>
-      <Link to="/" className="back-button">← Back to Home</Link>
+      
       <div className="company-summary-card">
   <div className="company-info">
     <div className="company-name-section">
@@ -57,9 +62,9 @@ function CompanyReviewsPage() {
     </div>
 
     <div className="rating-section">
-      <div className="stars">⭐⭐⭐⭐☆</div>
-      <span className="rating-score">{averageRating.toFixed(1)}</span>
-      <span className="review-count">Based on {reviews.length} reviews</span>
+      
+      
+      <span className="review-count">{reviews.length} reviews</span>
     </div>
   </div>
 
@@ -73,34 +78,47 @@ function CompanyReviewsPage() {
         <div key={idx} className="review-card">
           <div className="review-header">
             <div className="reviewer-info">
-              <span className="job-title">{titleCase(review.jobTitle)}</span>
+              <h3 className='job-title'>{titleCase(review.jobTitle)}</h3>
+              <div className='review-meta'>
+              <span>{titleCase(review.department)}</span>
               <span className="dot">  •  </span>
-              <span className="department">{titleCase(review.department)}</span>
-              <span className="dot"> • </span>
-              <span className="duration">{review.jobDuration}</span>
+              <span>{review.duration}</span>
               <span className="dot"> • </span>
               <span className={`status-badge ${review.employmentStatus === 'Current Employee' ? 'current' : 'former'}`}>
               {titleCase(review.employmentStatus)}
-            </span>
-          </div>
+                </span>
+              </div>
+              <span className='location'><MapPin size={15}/> {titleCase(review.location )}</span>
+            </div>
+            
             <span className="review-date">
-              {review.date ? new Date(review.date).toLocaleDateString() : 'No Date'}
+              <span className="stars">★★★★☆</span>
+              <span>
+                <Calendar size={15}/>
+                {review.date ? new Date(review.date).toLocaleDateString('en-US', {
+                  year: 'numeric',
+                  month: 'long',
+                  day: 'numeric',
+                }
+                   ) : 'No Date'}
+                </span>
             </span>
           </div>
 
-          <div className="review-rating">
-            <span className="stars">★★★★☆</span>
-            <span className="rating-score">{review.ratings?.overall || 4}/5</span>
-          </div>
+          
 
-          <div className="review-pros">
-            <p className="section-label green">● Pros</p>
+          <div className="review-section review-pros">
+            <p className="section-label green"><ThumbsUp size={20} color="green" /> Pros</p>
             <p>{review.pros}</p>
           </div>
 
-          <div className="review-cons">
-            <p className="section-label red">● Cons</p>
+          <div className="review-section review-cons">
+            <p className="section-label red"><ThumbsDown size={20} color="red" /> Cons</p>
             <p>{review.cons}</p>
+          </div>
+          <div className="review-section review-advice">
+            <p className="section-label blue"><MessageSquare size={20} color="#007bff" /> Advice to Management</p>
+            <p>{review.advice}</p>
           </div>
 
           
