@@ -5,6 +5,7 @@ import LandingPage from './pages/LandingPage'
 import WriteReviewPage from './pages/WriteReviewPage';
 import CompanyReviewsPage from './pages/CompanyReviewsPage';
 import Reviews from './pages/Reviews';
+import AllCompaniesPage from './pages/AllCompaniesPage';
 
 
 function App() {
@@ -17,7 +18,8 @@ function App() {
             <Route path="/" element={<LandingPage />} />
             <Route path="/write-review" element={<WriteReviewPage />} />
             <Route path="/reviews" element={<Reviews />} />
-            <Route path="/companies/:companyName/reviews" element={<CompanyReviewsPage/>} />
+            <Route path="/companies/:companyName/reviews" element={<CompanyReviewsPage />} />
+            <Route path="/companies" element={<AllCompaniesPage />} />
           </Routes>
         </main>
         {/*Footer can go here*/}
