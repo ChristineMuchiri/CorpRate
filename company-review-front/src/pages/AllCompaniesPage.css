@@ -29,7 +29,7 @@ h1 {
   padding: 1.5rem;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   overflow: hidden;
-  min-width: 320px;
+  min-width: 350px;
 }
 
 .company-card:hover {
@@ -89,4 +89,10 @@ h1 {
   padding: 2rem;
   font-size: 1.2rem;
   color: #c0392b;
+}
+.review-header-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
 }

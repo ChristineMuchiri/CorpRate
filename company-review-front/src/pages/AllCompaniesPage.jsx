@@ -1,12 +1,20 @@
 import React, { useEffect, useState } from 'react';
+import { Link} from 'react-router-dom'; 
 import './AllCompaniesPage.css'
+import { titleCase } from '../utils.js';
+import { Star, StarHalf, StarOff } from 'lucide-react';
 
 export default function AllCompaniesPage() {
     const API_URL = import.meta.env.VITE_API_BASE_URL;
   const [companies, setCompanies] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const renderStars = (rating) => {
+    const fullStars = Math.round(rating);
+    return '★'.repeat(fullStars) + '☆'.repeat(5 - fullStars);
+    };
 
+    
   useEffect(() => {
     const fetchCompanyData = async () => {
       try {
@@ -54,21 +62,25 @@ export default function AllCompaniesPage() {
   }
 
   return (
-    <div className="companies-overview">
+      <div className="companies-overview">
+          <div className='review-header-bar'>
+        <Link to="/" className="back-button">← Back to Home</Link>
+          <Link to="/write-review" className="review-button">Write Review</Link>
+          </div>
       <h1>Company Reviews</h1>
 
       <div className="companies-grid">
         {companies.map((company, index) => (
           <div key={index} className="company-card">
-            <h2>{company.companyName.toUpperCase()}</h2>
+            <h2>{titleCase(company.companyName)}</h2>
             
             <div className="company-rating">
-              <span className="overall-rating">
+              <span className="overall-rating" style={{ color: '#f5c518', fontSize: '1.2rem' }}>
+                {renderStars(company.averageRatings['Overall Rating'])}
+                <span style={{ marginLeft: '6px', color: '#333' }}>
                 {company.averageRatings['Overall Rating'].toFixed(1)}
-              </span>
-              <span className="review-count">
-                {company.reviewCount} reviews
-              </span>
+                </span>
+                </span>
             </div>
             
             <div className="rating-details">
