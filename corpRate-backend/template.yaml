@@ -88,6 +88,30 @@ Resources:
             ApiId: !Ref CorpRateHttpApi
       Policies:
         - AmazonDynamoDBReadOnlyAccess
+  
+  # Get all companies ratings function
+  GetCompaniesRatingsFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: getCompaniesRatings/
+      Handler: app.lambda_handler
+      Runtime: python3.13
+      FunctionName: GetCompaniesRatingsFunction
+      Architectures:
+        - x86_64
+      Environment:
+        Variables:
+          TABLE_NAME: !Ref CorpRateTable
+      Events:
+        GetCompaniesRatingsApiEvent:
+          Type: HttpApi
+          Properties:
+            Path: /companies
+            Method: GET
+            ApiId: !Ref CorpRateHttpApi
+      Policies: 
+        - AmazonDynamoDBReadOnlyAccess
+      
 
 Outputs:
   
