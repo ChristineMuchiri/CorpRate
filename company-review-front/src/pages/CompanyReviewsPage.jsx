@@ -21,6 +21,7 @@ function CompanyReviewsPage() {
           throw new Error('Network response was not ok');
         }
         const data = await response.json();
+        
         setReviews(data);
         
         // Calculate average rating
@@ -82,7 +83,7 @@ function CompanyReviewsPage() {
               <div className='review-meta'>
               <span>{titleCase(review.department)}</span>
               <span className="dot">  •  </span>
-              <span>{review.duration}</span>
+              <span>{review.jobDuration}</span>
               <span className="dot"> • </span>
               <span className={`status-badge ${review.employmentStatus === 'Current Employee' ? 'current' : 'former'}`}>
               {titleCase(review.employmentStatus)}

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom'; 
 import './AllCompaniesPage.css'
 import { titleCase } from '../utils.js';
-import { Star, StarHalf, StarOff, Users } from 'lucide-react';
+import { Star, StarHalf, StarOff, Users, Building2 } from 'lucide-react';
 
 export default function AllCompaniesPage() {
     const API_URL = import.meta.env.VITE_API_BASE_URL;
@@ -73,8 +73,11 @@ export default function AllCompaniesPage() {
           <div className='review-header-bar'>
         <Link to="/" className="back-button">← Back to Home</Link>
           <Link to="/write-review" className="review-button">Write Review</Link>
-          </div>
-      <h1>Company Reviews</h1>
+      </div>
+      <div className='heading-wrapper'>
+        <h1><Building2 size={35}/> Company Reviews</h1>
+        <p className='subheading'>Explore honest reviews on workplaces across Kenya.</p>
+      </div>
 
       <div className="companies-grid">
         {companies.map((company, index) => (
@@ -120,6 +123,9 @@ export default function AllCompaniesPage() {
                   {company.averageRatings['Compensation & Benefits'].toFixed(1)}
                 </span>
               </div>
+            </div>
+            <div className='reviews-page'>
+              <Link to={`/companies/${company.companyName}/reviews`} className="review-button">View All Reviews</Link>
             </div>
           </div>
         ))}
