@@ -27,4 +27,13 @@ manifest_hash = ""
 packagetype = "Zip"
 functions = ["GetCompaniesRatingsFunction"]
 
+[function_build_definitions.eabd4149-f32c-4923-9c59-d276ac5923c6]
+codeuri = "C:\\Users\\THINKPAD T470s\\Desktop\\CorpRate\\corpRate-backend\\getRecentReviews"
+runtime = "python3.13"
+architecture = "x86_64"
+handler = "app.lambda_handler"
+manifest_hash = ""
+packagetype = "Zip"
+functions = ["GetRecentReviewsFunction"]
+
 [layer_build_definitions]

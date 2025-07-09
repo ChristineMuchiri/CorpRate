@@ -1,6 +1,7 @@
 import boto3
 import json
 import os
+from datetime import datetime, timezone
 
 dynamodb = boto3.resource('dynamodb')
 def lambda_handler(event, context):
@@ -39,11 +40,14 @@ def lambda_handler(event, context):
         }
 
     # Store the review in DynamoDB
+    gsi1sk = datetime.now(timezone.utc).replace(microsecond=0).isoformat()
     try:
         response = table.put_item(
             Item={
                 'PK': f'COMPANY#{companyName}',
-                'SK': f'REVIEW#{timestamp}',
+                'SK': f'REVIEW#{gsi1sk}',
+                'GSI1PK': 'REVIEW',
+                'GSI1SK': gsi1sk,
                 'companyName': companyName,
                 'jobTitle': jobTitle,
                 'department': department,

@@ -8,8 +8,8 @@ Description: >
 
 Globals:
   Function:
-    Timeout: 3
-    MemorySize: 128
+    Timeout: 10
+    MemorySize: 256
     
     LoggingConfig:
       LogFormat: JSON
@@ -40,12 +40,26 @@ Resources:
           AttributeType: "S"
         - AttributeName: "SK"
           AttributeType: "S"
+        - AttributeName: "GSI1PK"
+          AttributeType: "S"
+        - AttributeName: "GSI1SK"
+          AttributeType: "S"
       BillingMode: PAY_PER_REQUEST
       KeySchema:
         - AttributeName: "PK"
           KeyType: "HASH"
         - AttributeName: "SK"
           KeyType: "RANGE"
+      GlobalSecondaryIndexes:
+        - IndexName: ReviewsByTime
+          KeySchema:
+            - AttributeName: "GSI1PK"
+              KeyType: "HASH"
+            - AttributeName: "GSI1SK"
+              KeyType: "RANGE"
+          Projection:
+            ProjectionType: ALL
+            
 # SubmitReviewFunction
   SubmitReviewFunction:
     Type: AWS::Serverless::Function 
@@ -111,7 +125,29 @@ Resources:
             ApiId: !Ref CorpRateHttpApi
       Policies: 
         - AmazonDynamoDBReadOnlyAccess
-      
+  # Get recent reviews Fuunction
+  GetRecentReviewsFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: getRecentReviews
+      Handler: app.lambda_handler
+      Runtime: python3.13
+      FunctionName: GetRecentReviews
+      Architectures:
+        - x86_64
+      Environment:
+        Variables:
+          TABLE_NAME: !Ref CorpRateTable
+          GSI_NAME: 'ReviewsByTime'
+      Events:
+        GetRecentReviewsApiEvent:
+          Type: HttpApi
+          Properties:
+            Path: /reviews
+            Method: GET
+            ApiId: !Ref CorpRateHttpApi
+      Policies:
+        - AmazonDynamoDBReadOnlyAccess
 
 Outputs:
   
