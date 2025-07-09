@@ -8,9 +8,10 @@ function LandingPage(){
   const navigate = useNavigate();
 
   const handleSearch = () => {
-    if (searchTerm.trim() !== '') {
+    const cleaned = searchTerm.trim().toLowerCase();
+    if (cleaned !== '') {
 
-      navigate(`/companies/${searchTerm.toLowerCase()}/reviews`);
+      navigate(`/companies/${cleaned}/reviews`);
     } else {
       navigate('/');
     }
