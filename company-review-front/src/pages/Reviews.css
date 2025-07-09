@@ -28,3 +28,27 @@
 .nav-links a:hover {
   color: #3d96f6;
 }
+.reviews-list {
+  display: grid;
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.review-card {
+  background-color: #fff;
+  border: 1px solid #e0e0e0;
+  padding: 1rem 1.5rem;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+.review-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.review-date {
+  font-size: 0.9rem;
+  color: #888;
+}
