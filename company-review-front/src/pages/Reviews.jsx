@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './Reviews.css'
 import { Link } from 'react-router-dom';
 import { titleCase, formatDate } from '../utils.js';
-import {Calendar, ThumbsDown, ThumbsUp, Building2} from 'lucide-react';
+import {Calendar, ThumbsDown, ThumbsUp, Building2, Heart} from 'lucide-react';
 
 
 function renderStars(rating) {
@@ -29,10 +29,32 @@ export default function Reviews() {
   const [reviews, setReviews] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-
-
-
   const API_URL = import.meta.env.VITE_API_BASE_URL;
+
+  const handleLikeReview = async (PK, SK, index) => {
+  try {
+    const response = await fetch(`${API_URL}/like-review`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ PK, SK })
+    });
+
+    if (!response.ok) {
+      throw new Error(`Failed to like review: ${response.statusText}`);
+    }
+
+    const result = await response.json();
+    console.log('Review liked:', result);
+    const updated = [...reviews];
+    updated[index].likes = parseInt(result.likes);
+    setReviews(updated);
+  } catch (error) {
+    console.error('Error liking review:', error.message);
+  }
+};
+
 
   useEffect(() => {
     const fetchRecentReviews = async () => {
@@ -43,7 +65,10 @@ export default function Reviews() {
         }
         const data = await response.json();
         console.log(data)
-        setReviews(data)
+        
+
+        setReviews(data.map(review => ({ ...review, likes: review.likes || 0 })));
+
       } catch (err) {
         console.error('Fetch error:', err);
         setError(err.message);
@@ -126,7 +151,7 @@ export default function Reviews() {
           
           {/* Feedback Section */}
           <div className='feedback-section'>
-            <button className="feedback-button" onClick={() => console.log('Helpful clicked')}>Helpful</button>
+            <button className="feedback-button" onClick={() => handleLikeReview(review.PK, review.SK, index)}><ThumbsUp size={15}/> Helpful {review.likes > 0 ? `(${review.likes})` : ''}</button>
             <button className="feedback-button flag" onClick={() => console.log('Flag clicked')}>🚩 Flag Review</button>
 
           <button className='view-company-reviews'>

@@ -138,14 +138,16 @@
   justify-content: space-between;
   align-items: center;
   gap: 1rem;
-  margin-top: 1rem;
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
   flex-wrap: wrap;
+  border-top: 1px solid #e0e0e0; 
 }
 
 .feedback-button {
   background: transparent;
   border: 1px solid #ccc;
-  border-radius: 20px;
+  border-radius: 10px;
   padding: 0.4rem 1rem;
   font-size: 0.9rem;
   cursor: pointer;
@@ -157,8 +159,8 @@
 }
 
 .feedback-button.flag {
-  border-color: #dc3545;
-  color: #dc3545;
+  border-color: #bc8f94;
+  color: #d6999f;
 }
 
 .feedback-button.flag:hover {
@@ -168,7 +170,7 @@
 .view-company-reviews {
   background: transparent;
   border: 1px solid #007bff;
-  border-radius: 20px;
+  border-radius: 10px;
   padding: 0.4rem 1rem;
   cursor: pointer;
   transition: all 0.3s ease;

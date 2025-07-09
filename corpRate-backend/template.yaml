@@ -148,6 +148,28 @@ Resources:
             ApiId: !Ref CorpRateHttpApi
       Policies:
         - AmazonDynamoDBReadOnlyAccess
+  # Like Review Function
+  LikeReviewFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: likeReview/
+      Handler: app.lambda_handler
+      Runtime: python3.13
+      FunctionName: LikeReviewFunction
+      Architectures:
+        - x86_64
+      Environment:
+        Variables:
+          TABLE_NAME: !Ref CorpRateTable
+      Events:
+        LikeReviewApiEvent:
+          Type: HttpApi
+          Properties:
+            Path: /like-review
+            Method: POST
+            ApiId: !Ref CorpRateHttpApi
+      Policies:
+        - AmazonDynamoDBFullAccess  
 
 Outputs:
   
