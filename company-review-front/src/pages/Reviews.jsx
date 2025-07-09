@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import './Reviews.css'
 import { Link } from 'react-router-dom';
+import { titleCase, formatDate } from '../utils';
+import {Calendar, ThumbsDown, ThumbsUp} from 'lucide-react';
 
 
 export default function Reviews() {
@@ -33,39 +35,74 @@ export default function Reviews() {
   if (loading) return <div>Loading recent reviews...</div>
   if (error) return <div>Error: { error}</div>
   return (
-    <>
-      <div className='nav-bar'>
-      <Link to="/" className='nav-logo'>CorpRate</Link>
-      <div className='nav-links'>
+  <>
+    {/* Navigation Bar */}
+    <div className="nav-bar">
+      <Link to="/" className="nav-logo">CorpRate</Link>
+      <div className="nav-links">
         <Link to="/companies">Companies</Link>
         <Link to="/write-review">Write Review</Link>
       </div>
-        </div>
-   
+    </div>
+
+    {/* Reviews Intro */}
     <div className="reviews-container">
       <h1 className="reviews-title">Latest Reviews</h1>
       <p className="reviews-intro">
         Read honest employee experiences from companies across different industries
       </p>
-      </div>
-      <div className="recent-reviews">
-      <h2>Recent Reviews (Last 3 Days)</h2>
-      <div className="reviews-list">
-  {reviews.map((review, index) => (
-    <div key={index} className="review-card">
-      <div className="review-header">
-        <h3>{review.companyName}</h3>
-        <span className="review-date">{review.date}</span>
-      </div>
-      <p><strong>Pros:</strong> {review.pros}</p>
-      <p><strong>Cons:</strong> {review.cons}</p>
-      <p><strong>Advice:</strong> {review.advice}</p>
-      <p><strong>Department:</strong> {review.department} — <strong>Title:</strong> {review.jobTitle}</p>
     </div>
-  ))}
-</div>
 
+    {/* Review List */}
+    <div className="reviews-list">
+      {reviews.map((review, index) => (
+        <div key={index} className="review-card">
+          
+          {/* Header with Company Name and Date */}
+          <div className="review-header">
+            <h3 className="company-name">{titleCase(review.companyName)}</h3>
+            <span className="review-date">
+              <Calendar size={20} />
+              {formatDate(review.date)}
+            </span>
+          </div>
+
+          {/* Metadata Section */}
+          <div className="review-info">
+            <p className="review-rating">Overall Rating: {review.ratings?.overall || 'N/A'}</p>
+            <div className="review-meta">
+              <span>{titleCase(review.jobTitle)}</span>
+              <span className="dot"> • </span>
+              <span>{titleCase(review.department)}</span>
+              <span className="dot"> • </span>
+              <span>{review.jobDuration}</span>
+              <span className="dot"> • </span>
+              <span className={`status-badge ${review.employmentStatus === 'Current Employee' ? 'current' : 'former'}`}>
+                {titleCase(review.employmentStatus)}
+              </span>
+            </div>
+          </div>
+
+          {/* Pros Section */}
+          <div className="review-section review-pros">
+            <p className="section-label green">
+              <ThumbsUp size={20} color="green" /> Pros
+            </p>
+            <p>{review.pros}</p>
+          </div>
+
+          {/* Cons Section */}
+          <div className="review-section review-cons">
+            <p className="section-label red">
+              <ThumbsDown size={20} color="red" /> Cons
+            </p>
+            <p>{review.cons}</p>
+          </div>
+
+        </div>
+      ))}
     </div>
-      </>
-  );
+  </>
+);
+
 }

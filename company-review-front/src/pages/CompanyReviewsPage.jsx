@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { ThumbsUp, ThumbsDown, MessageSquare, MapPin, Calendar } from "lucide-react";
 import { Link, useParams} from 'react-router-dom'; 
 import './CompanyReviewsPage.css';
-import { titleCase } from '../utils.js'; 
+import { titleCase, formatDate } from '../utils.js'; 
 
 function CompanyReviewsPage() { 
   const API_URL = import.meta.env.VITE_API_BASE_URL;
@@ -96,12 +96,7 @@ function CompanyReviewsPage() {
               <span className="stars">★★★★☆</span>
               <span>
                 <Calendar size={15}/>
-                {review.date ? new Date(review.date).toLocaleDateString('en-US', {
-                  year: 'numeric',
-                  month: 'long',
-                  day: 'numeric',
-                }
-                   ) : 'No Date'}
+                {review.date ? formatDate(review) : 'No Date'}
                 </span>
             </span>
           </div>

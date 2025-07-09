@@ -28,18 +28,27 @@
 .nav-links a:hover {
   color: #3d96f6;
 }
+.reviews-container {
+  width: 60%;
+  margin: 2rem auto 1rem;
+  padding: 0 1rem;
+  text-align: center;
+}
+
 .reviews-list {
-  display: grid;
+  width: 60%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
   gap: 1.5rem;
-  margin-top: 1.5rem;
 }
 
 .review-card {
-  background-color: #fff;
+  background: #fff;
   border: 1px solid #e0e0e0;
-  padding: 1rem 1.5rem;
-  border-radius: 10px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
 }
 
 .review-header {
@@ -49,6 +58,66 @@
 }
 
 .review-date {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: #555;
   font-size: 0.9rem;
-  color: #888;
 }
+
+.review-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.95rem;
+  margin-top: 0.4rem;
+  color: #555;
+}
+
+.review-rating {
+  font-weight: 600;
+  margin: 0.5rem 0;
+}
+
+.dot {
+  color: #aaa;
+}
+
+.status-badge {
+  padding: 0.25rem 0.6rem;
+  border-radius: 1rem;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+.status-badge.current {
+  background: #d1e7dd;
+  color: #0f5132;
+}
+
+.status-badge.former {
+  background: #f8d7da;
+  color: #842029;
+}
+
+.review-section {
+  margin-top: 1rem;
+}
+
+.section-label {
+  font-weight: 600;
+  margin-bottom: 0.3rem;
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.section-label.green {
+  color: green;
+}
+
+.section-label.red {
+  color: red;
+}
+
