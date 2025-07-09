@@ -75,10 +75,18 @@
   color: #555;
 }
 
-.review-rating {
-  font-weight: 600;
-  margin: 0.5rem 0;
+
+
+.stars {
+  color: #f5b50a;
+  font-size: 1.2rem;
 }
+
+.rating-value {
+  color: #333;
+  font-weight: 500;
+}
+
 
 .dot {
   color: #aaa;
@@ -92,13 +100,13 @@
 }
 
 .status-badge.current {
-  background: #d1e7dd;
-  color: #0f5132;
+  background: #0a0a0a;
+  color: #f0f3f1;
 }
 
 .status-badge.former {
-  background: #f8d7da;
-  color: #842029;
+  background: #141313;
+  color: #eee8e9;
 }
 
 .review-section {
@@ -119,5 +127,10 @@
 
 .section-label.red {
   color: red;
+}
+.stars span {
+  color: gold;
+  font-size: 1.2rem;
+  margin-right: 2px;
 }
 

@@ -1,14 +1,36 @@
 import React, { useState, useEffect } from 'react';
 import './Reviews.css'
 import { Link } from 'react-router-dom';
-import { titleCase, formatDate } from '../utils';
+import { titleCase, formatDate } from '../utils.js';
 import {Calendar, ThumbsDown, ThumbsUp} from 'lucide-react';
 
+
+function renderStars(rating) {
+  const stars = [];
+  const fullStars = Math.floor(rating);
+  const hasHalfStar = rating % 1 >= 0.5;
+
+  for (let i = 0; i < fullStars; i++) {
+    stars.push(<span key={i}>★</span>);
+  }
+
+  if (hasHalfStar) {
+    stars.push(<span key="half">☆</span>);
+  }
+
+  while (stars.length < 5) {
+    stars.push(<span key={stars.length}>☆</span>);
+  }
+
+  return stars;
+}
 
 export default function Reviews() {
   const [reviews, setReviews] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+
+
 
   const API_URL = import.meta.env.VITE_API_BASE_URL;
 
@@ -69,7 +91,10 @@ export default function Reviews() {
 
           {/* Metadata Section */}
           <div className="review-info">
-            <p className="review-rating">Overall Rating: {review.ratings?.overall || 'N/A'}</p>
+            <p className="star-rating">
+              <span className='stars'>{renderStars(review.ratings?.['Overall Rating'] || 0 )}</span>
+              <span className="rating-value">{review.ratings?.['Overall Rating']|| 0}/5</span>
+              </p>
             <div className="review-meta">
               <span>{titleCase(review.jobTitle)}</span>
               <span className="dot"> • </span>
