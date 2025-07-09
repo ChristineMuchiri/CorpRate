@@ -133,4 +133,58 @@
   font-size: 1.2rem;
   margin-right: 2px;
 }
+.feedback-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 1rem;
+  flex-wrap: wrap;
+}
+
+.feedback-button {
+  background: transparent;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  padding: 0.4rem 1rem;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.feedback-button:hover {
+  background-color: #f0f0f0;
+}
+
+.feedback-button.flag {
+  border-color: #dc3545;
+  color: #dc3545;
+}
+
+.feedback-button.flag:hover {
+  background-color: #dc354510;
+}
+
+.view-company-reviews {
+  background: transparent;
+  border: 1px solid #007bff;
+  border-radius: 20px;
+  padding: 0.4rem 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.view-company-reviews:hover {
+  background-color: #007bff;
+}
+
+.view-company-link {
+  text-decoration: none;
+  color: #007bff;
+  font-weight: 500;
+}
+
+.view-company-reviews:hover .view-company-link {
+  color: white;
+}
 

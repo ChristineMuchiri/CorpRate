@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './Reviews.css'
 import { Link } from 'react-router-dom';
 import { titleCase, formatDate } from '../utils.js';
-import {Calendar, ThumbsDown, ThumbsUp} from 'lucide-react';
+import {Calendar, ThumbsDown, ThumbsUp, Building2} from 'lucide-react';
 
 
 function renderStars(rating) {
@@ -82,7 +82,7 @@ export default function Reviews() {
           
           {/* Header with Company Name and Date */}
           <div className="review-header">
-            <h3 className="company-name">{titleCase(review.companyName)}</h3>
+            <h3 className="company-name"><Building2 size={20}/> {titleCase(review.companyName)}</h3>
             <span className="review-date">
               <Calendar size={20} />
               {formatDate(review.date)}
@@ -123,7 +123,16 @@ export default function Reviews() {
             </p>
             <p>{review.cons}</p>
           </div>
+          
+          {/* Feedback Section */}
+          <div className='feedback-section'>
+            <button className="feedback-button" onClick={() => console.log('Helpful clicked')}>Helpful</button>
+            <button className="feedback-button flag" onClick={() => console.log('Flag clicked')}>🚩 Flag Review</button>
 
+          <button className='view-company-reviews'>
+        <Link to={`/companies/${review.companyName}/reviews`} className="view-company-link">View Company</Link>
+         </button> 
+          </div>
         </div>
       ))}
     </div>

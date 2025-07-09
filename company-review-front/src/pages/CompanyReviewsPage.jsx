@@ -5,6 +5,26 @@ import { Link, useParams} from 'react-router-dom';
 import './CompanyReviewsPage.css';
 import { titleCase, formatDate } from '../utils.js'; 
 
+function renderStars(rating) {
+  const stars = [];
+  const fullStars = Math.floor(rating);
+  const hasHalfStar = rating % 1 >= 0.5;
+
+  for (let i = 0; i < fullStars; i++) {
+    stars.push(<span key={i}>★</span>);
+  }
+
+  if (hasHalfStar) {
+    stars.push(<span key="half">☆</span>);
+  }
+
+  while (stars.length < 5) {
+    stars.push(<span key={stars.length}>☆</span>);
+  }
+
+  return stars;
+}
+
 function CompanyReviewsPage() { 
   const API_URL = import.meta.env.VITE_API_BASE_URL;
   const { companyName } = useParams();
@@ -93,10 +113,10 @@ function CompanyReviewsPage() {
             </div>
             
             <span className="review-date">
-              <span className="stars">★★★★☆</span>
+              <span className='stars'>{renderStars(review.ratings?.['Overall Rating'] || 0 )}</span>
               <span>
                 <Calendar size={15}/>
-                {review.date ? formatDate(review) : 'No Date'}
+                {review.date ? formatDate(review.date) : 'No Date'}
                 </span>
             </span>
           </div>
