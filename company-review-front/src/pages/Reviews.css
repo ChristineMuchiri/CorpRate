@@ -55,6 +55,11 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  box-shadow: 0 4px 12px rgba(216, 29, 29, 0.04);
+  padding-bottom: 0.5rem;
+  padding-left: 0.5rem;
+  padding-top: 0.5rem;
+  border-bottom: 1px solid #e0e0e0;
 }
 
 .review-date {

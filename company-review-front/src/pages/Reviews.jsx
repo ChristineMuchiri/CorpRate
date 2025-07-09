@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import './Reviews.css'
 import { Link } from 'react-router-dom';
 import { titleCase, formatDate } from '../utils.js';
-import {Calendar, ThumbsDown, ThumbsUp, Building2, Heart} from 'lucide-react';
+import {Calendar, ThumbsDown, ThumbsUp, Building2, MapPin} from 'lucide-react';
+import { motion} from 'framer-motion';
 
 
 function renderStars(rating) {
@@ -103,11 +104,23 @@ export default function Reviews() {
     {/* Review List */}
     <div className="reviews-list">
       {reviews.map((review, index) => (
-        <div key={index} className="review-card">
+        <motion.div
+        key={index}
+        className="review-card"
+        initial={{ opacity: 0, y: 30 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.4, delay: index * 0.1 }}
+        whileHover={{
+    scale: 1.02,
+    boxShadow: "0 8px 20px rgba(0, 0, 0, 0.15)",
+    transition: { type: 'spring', stiffness: 300 },
+  }}
+>
           
           {/* Header with Company Name and Date */}
           <div className="review-header">
             <h3 className="company-name"><Building2 size={20}/> {titleCase(review.companyName)}</h3>
+            
             <span className="review-date">
               <Calendar size={20} />
               {formatDate(review.date)}
@@ -116,7 +129,9 @@ export default function Reviews() {
 
           {/* Metadata Section */}
           <div className="review-info">
+            <span><MapPin size={15}/>{titleCase(review.location)}</span>
             <p className="star-rating">
+              
               <span className='stars'>{renderStars(review.ratings?.['Overall Rating'] || 0 )}</span>
               <span className="rating-value">{review.ratings?.['Overall Rating']|| 0}/5</span>
               </p>
@@ -158,7 +173,7 @@ export default function Reviews() {
         <Link to={`/companies/${review.companyName}/reviews`} className="view-company-link">View Company</Link>
          </button> 
           </div>
-        </div>
+        </motion.div>
       ))}
     </div>
   </>
