@@ -31,7 +31,7 @@ export default function Reviews() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const API_URL = import.meta.env.VITE_API_BASE_URL;
-
+  
   const handleLikeReview = async (PK, SK, index) => {
   try {
     const response = await fetch(`${API_URL}/like-review`, {

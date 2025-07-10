@@ -4,6 +4,7 @@ import './WriteReviewPage.css';
 import { Link } from 'react-router-dom';
 
 
+
 const categories = [
         "Overall Rating",
         "Management Quality",
@@ -31,7 +32,7 @@ function WriteReviewPage() {
     const [loading, setLoading] = useState(false);
 
 
-
+    
     
 
     const [ratings, setRatings] = useState(

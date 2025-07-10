@@ -4,6 +4,7 @@ import './AllCompaniesPage.css'
 import { titleCase } from '../utils.js';
 import { Star, StarHalf, StarOff, Users, Building2 } from 'lucide-react';
 
+
 export default function AllCompaniesPage() {
     const API_URL = import.meta.env.VITE_API_BASE_URL;
   const [companies, setCompanies] = useState([]);
