@@ -1,36 +1,58 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
-Description: >
-  corpRate-backend
+Description: CorpRate Backend API
 
-  Sample SAM Template for corpRate-backend
-
+Parameters:
+  StageName:
+    Type: String
+    Default: dev
+  AllowedOrigin:
+    Type: String
+    Default: http://localhost:5173
 
 Globals:
   Function:
     Timeout: 10
     MemorySize: 256
-    
+    Runtime: python3.13
     LoggingConfig:
       LogFormat: JSON
+
 Resources:
-# HttpApi
-  CorpRateHttpApi:
-    Type: AWS::Serverless::HttpApi
+  # 1. Cognito User Pool
+  CorpRateUserPool:
+    Type: AWS::Cognito::UserPool
     Properties:
-      StageName: dev
-      Name: CorpRateHttpApi
-      CorsConfiguration:
-        AllowHeaders:
-          - Content-Type
-        AllowMethods:
-          - POST
-          - OPTIONS
-          - GET
-        AllowOrigins: 
-          - http://localhost:5173
-        MaxAge: 300
-# DynamoDB Table
+      UserPoolName: CorpRateUserPool
+      AutoVerifiedAttributes:
+        - email
+      UsernameAttributes:
+        - email
+      Policies:
+        PasswordPolicy:
+          MinimumLength: 8
+      AccountRecoverySetting:
+        RecoveryMechanisms:
+          - Name: verified_email
+            Priority: 1
+
+  # 2. User Pool Client
+  CorpRateUserPoolClient:
+    Type: AWS::Cognito::UserPoolClient
+    Properties:
+      ClientName: CorpRateUserPoolClient
+      UserPoolId: !Ref CorpRateUserPool
+      GenerateSecret: false
+      ExplicitAuthFlows:
+        - ALLOW_USER_PASSWORD_AUTH
+        - ALLOW_REFRESH_TOKEN_AUTH
+      CallbackURLs:
+        - !Ref AllowedOrigin
+      LogoutURLs:
+        - !Ref AllowedOrigin
+    DependsOn: CorpRateUserPool
+
+  # 3. DynamoDB Table
   CorpRateTable:
     Type: AWS::DynamoDB::Table
     Properties:
@@ -51,130 +73,143 @@ Resources:
         - AttributeName: "SK"
           KeyType: "RANGE"
       GlobalSecondaryIndexes:
-        - IndexName: ReviewsByTime
+        - IndexName: "ReviewsByTime"
           KeySchema:
             - AttributeName: "GSI1PK"
               KeyType: "HASH"
             - AttributeName: "GSI1SK"
               KeyType: "RANGE"
           Projection:
-            ProjectionType: ALL
-            
-# SubmitReviewFunction
-  SubmitReviewFunction:
-    Type: AWS::Serverless::Function 
+            ProjectionType: "ALL"
+
+  # 4. HTTP API
+  CorpRateHttpApi:
+    Type: AWS::Serverless::HttpApi
     Properties:
+      StageName: !Ref StageName
+      CorsConfiguration:
+        AllowHeaders:
+          - Content-Type
+          - Authorization
+        AllowMethods:
+          - GET
+          - POST
+          - OPTIONS
+        AllowOrigins:
+          - !Ref AllowedOrigin
+        AllowCredentials: true
+        MaxAge: 300
+    DependsOn:
+      - CorpRateUserPool
+      - CorpRateUserPoolClient
+
+  # 5. Lambda Functions with inline policies
+  SubmitReviewFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: SubmitReviewFunction
       CodeUri: submitReview/
       Handler: app.lambda_handler
-      Runtime: python3.13
-      FunctionName: SubmitReviewFunction
-      Architectures:
-      - x86_64
       Environment:
         Variables:
           TABLE_NAME: !Ref CorpRateTable
-      Events:
-        SubmitReviewApiEvent:
-          Type: HttpApi 
-          Properties:
-            Path: /submit-review
-            Method: POST
-            ApiId: !Ref CorpRateHttpApi
-# GetCompanyReviewsFunction
-  GetLatestReviewsFunction:
-    Type: AWS::Serverless::Function 
+      Policies:
+        - DynamoDBCrudPolicy:
+            TableName: !Ref CorpRateTable
+    DependsOn:
+      - CorpRateTable
+      - CorpRateHttpApi
+
+  GetCompanyReviewsFunction:
+    Type: AWS::Serverless::Function
     Properties:
+      FunctionName: GetCompanyReviewsFunction
       CodeUri: getCompanyReviews/
       Handler: app.lambda_handler
-      Runtime: python3.13
-      FunctionName: GetCompanyReviewsFunction
-      Architectures:
-      - x86_64
       Environment:
         Variables:
           TABLE_NAME: !Ref CorpRateTable
-      Events:
-        GetLatestReviewsApiEvent:
-          Type: HttpApi 
-          Properties:
-            Path: /companies/{companyName}/reviews
-            Method: GET
-            ApiId: !Ref CorpRateHttpApi
       Policies:
-        - AmazonDynamoDBReadOnlyAccess
-  
-  # Get all companies ratings function
+        - DynamoDBReadPolicy:
+            TableName: !Ref CorpRateTable
+    DependsOn:
+      - CorpRateTable
+      - CorpRateHttpApi
+
   GetCompaniesRatingsFunction:
     Type: AWS::Serverless::Function
     Properties:
+      FunctionName: GetCompaniesRatingsFunction
       CodeUri: getCompaniesRatings/
       Handler: app.lambda_handler
-      Runtime: python3.13
-      FunctionName: GetCompaniesRatingsFunction
-      Architectures:
-        - x86_64
       Environment:
         Variables:
           TABLE_NAME: !Ref CorpRateTable
-      Events:
-        GetCompaniesRatingsApiEvent:
-          Type: HttpApi
-          Properties:
-            Path: /companies
-            Method: GET
-            ApiId: !Ref CorpRateHttpApi
-      Policies: 
-        - AmazonDynamoDBReadOnlyAccess
-  # Get recent reviews Fuunction
+      Policies:
+        - DynamoDBReadPolicy:
+            TableName: !Ref CorpRateTable
+    DependsOn:
+      - CorpRateTable
+      - CorpRateHttpApi
+
   GetRecentReviewsFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: getRecentReviews
+      FunctionName: GetRecentReviewsFunction
+      CodeUri: getRecentReviews/
       Handler: app.lambda_handler
-      Runtime: python3.13
-      FunctionName: GetRecentReviews
-      Architectures:
-        - x86_64
       Environment:
         Variables:
           TABLE_NAME: !Ref CorpRateTable
-          GSI_NAME: 'ReviewsByTime'
-      Events:
-        GetRecentReviewsApiEvent:
-          Type: HttpApi
-          Properties:
-            Path: /reviews
-            Method: GET
-            ApiId: !Ref CorpRateHttpApi
+          GSI_NAME: "ReviewsByTime"
       Policies:
-        - AmazonDynamoDBReadOnlyAccess
-  # Like Review Function
+        - DynamoDBReadPolicy:
+            TableName: !Ref CorpRateTable
+    DependsOn:
+      - CorpRateTable
+      - CorpRateHttpApi
+
   LikeReviewFunction:
     Type: AWS::Serverless::Function
     Properties:
+      FunctionName: LikeReviewFunction
       CodeUri: likeReview/
       Handler: app.lambda_handler
-      Runtime: python3.13
-      FunctionName: LikeReviewFunction
-      Architectures:
-        - x86_64
       Environment:
         Variables:
           TABLE_NAME: !Ref CorpRateTable
-      Events:
-        LikeReviewApiEvent:
-          Type: HttpApi
-          Properties:
-            Path: /like-review
-            Method: POST
-            ApiId: !Ref CorpRateHttpApi
       Policies:
-        - AmazonDynamoDBFullAccess  
+        - DynamoDBCrudPolicy:
+            TableName: !Ref CorpRateTable
+    DependsOn:
+      - CorpRateTable
+      - CorpRateHttpApi
+
+  # 6. API Authorizer
+  ApiAuthorizer:
+    Type: AWS::ApiGatewayV2::Authorizer
+    Properties:
+      Name: CorpRateAuthorizer
+      ApiId: !Ref CorpRateHttpApi
+      AuthorizerType: JWT
+      IdentitySource: ["$request.header.Authorization"]
+      JwtConfiguration:
+        Audience: [!Ref CorpRateUserPoolClient]
+        Issuer: !Sub "https://cognito-idp.${AWS::Region}.amazonaws.com/${CorpRateUserPool}"
+    DependsOn:
+      - CorpRateHttpApi
+      - CorpRateUserPoolClient
 
 Outputs:
-  
-  CorpRateHttpApiUrl:
-    Description: API Gateway endpoint URL for dev stage for corpRate-backend 
-      function
-    Value: !Sub "https://${CorpRateHttpApi}.execute-api.${AWS::Region}.amazonaws.com/dev"
-  
+  UserPoolId:
+    Description: Cognito User Pool ID
+    Value: !Ref CorpRateUserPool
+  UserPoolClientId:
+    Description: Cognito Client ID
+    Value: !Ref CorpRateUserPoolClient
+  HttpApiUrl:
+    Description: API Gateway Endpoint URL
+    Value: !Sub "https://${CorpRateHttpApi}.execute-api.${AWS::Region}.amazonaws.com/${StageName}"
+  DynamoTableName:
+    Description: DynamoDB Table Name
+    Value: !Ref CorpRateTable

@@ -20,6 +20,7 @@ s3_prefix = "corpRate-backend"
 region = "us-east-1"
 disable_rollback = true
 image_repositories = []
+parameter_overrides = "StageName=\"dev\" AllowedOrigin=\"http://localhost:5173\""
 
 [default.package.parameters]
 resolve_s3 = true
