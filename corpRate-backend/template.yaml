@@ -173,6 +173,61 @@ Resources:
             ApiId: !Ref CorpRateHttpApi
       Policies:
         - AmazonDynamoDBFullAccess  
+  # Cognito User Pool
+  CorpRateUserPool:
+    Type: AWS::Cognito::UserPool
+    Properties:
+      UserPoolName: corpRate-user-pool
+      AccountRecoverySetting:
+        RecoveryMechanisms:
+          - Name: verified_email
+            Priority: 1
+      AdminCreateUserConfig:
+        AllowAdminCreateUserOnly: false
+      UsernameAttributes:
+        - email
+      AutoVerifiedAttributes:
+        - email
+      DeletionProtection: ACTIVE
+      Policies:
+        PasswordPolicy:
+          MinimumLength: 6
+  # Cognito User pool client
+  CorpRateAppClient:
+    Type: AWS::Cognito::UserPoolClient
+    Properties:
+      AccessTokenValidity: 30
+      AllowedOAuthFlows:
+        - code
+      AllowedOAuthFlowsUserPoolClient: true
+      AllowedOAuthScopes:
+        - email
+        - openid
+        - profile
+      CallbackURLs:
+        - http://localhost:5173/
+      ClientName: corpRate-app-client
+      DefaultRedirectURI: http://localhost:5173/
+      IdTokenValidity: 30
+      LogoutURLs:
+        - http://localhost:5173/                                                                                                                                                                                                                                                                                                                                               
+      PreventUserExistenceErrors: ENABLED
+      ReadAttributes:
+        - email
+        - email_verified
+      RefreshTokenValidity: 10
+      TokenValidityUnits:
+        AccessToken: minutes
+        IdToken: minutes
+        RefreshToken: days
+      UserPoolId: !Ref CorpRateUserPool
+  # Hosted UI Domain
+  UserPoolHostedUIDomain:
+    Type: AWS::Cognito::UserPoolDomain
+    Properties:
+      UserPoolId: !Ref CorpRateUserPool
+      Domain: "corprate-dev"
+        
 
 Outputs:
   
@@ -180,4 +235,7 @@ Outputs:
     Description: API Gateway endpoint URL for dev stage for corpRate-backend 
       function
     Value: !Sub "https://${CorpRateHttpApi}.execute-api.${AWS::Region}.amazonaws.com/dev"
-  
+  CognitoUserPoolId:
+    Value: !Ref CorpRateUserPool
+    Export:
+      Name: CorpRateUserPoolId
