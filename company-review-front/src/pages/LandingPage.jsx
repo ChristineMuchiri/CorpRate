@@ -13,7 +13,7 @@ function LandingPage(){
 
       navigate(`/companies/${cleaned}/reviews`);
     } else {
-      navigate('/');
+      navigate('/landing-page');
     }
   }
   return (

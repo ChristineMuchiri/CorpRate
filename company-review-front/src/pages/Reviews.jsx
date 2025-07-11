@@ -86,7 +86,7 @@ export default function Reviews() {
   <>
     {/* Navigation Bar */}
     <div className="nav-bar">
-      <Link to="/" className="nav-logo">CorpRate</Link>
+      <Link to="/landing-page" className="nav-logo">CorpRate</Link>
       <div className="nav-links">
         <Link to="/companies">Companies</Link>
         <Link to="/write-review">Write Review</Link>

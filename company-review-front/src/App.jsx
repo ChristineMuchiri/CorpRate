@@ -6,6 +6,8 @@ import WriteReviewPage from './pages/WriteReviewPage';
 import CompanyReviewsPage from './pages/CompanyReviewsPage';
 import Reviews from './pages/Reviews';
 import AllCompaniesPage from './pages/AllCompaniesPage';
+import OAuthCallbackHandler from './OAuthCallbackHandler';
+import RequireAuth from './RequireAuth';
 
 
 
@@ -15,11 +17,12 @@ function App() {
       <div className="app-container">
         <main className="main-content">
           <Routes>
-            <Route path="/" element={<LandingPage />} />
-            <Route path="/write-review" element={<WriteReviewPage />} />
-            <Route path="/reviews" element={<Reviews />} />
-            <Route path="/companies/:companyName/reviews" element={<CompanyReviewsPage />}/>
-            <Route path="/companies" element={<AllCompaniesPage />} />
+            <Route path="/" element={<OAuthCallbackHandler />} />
+            <Route path="/landing-page" element={<LandingPage />} />
+            <Route path="/write-review" element={<RequireAuth><WriteReviewPage /></RequireAuth>} />
+            <Route path="/reviews" element={<RequireAuth><Reviews /></RequireAuth>} />
+            <Route path="/companies/:companyName/reviews" element={<RequireAuth><CompanyReviewsPage /></RequireAuth>}/>
+            <Route path="/companies" element={<RequireAuth><AllCompaniesPage /></RequireAuth>} />
           </Routes>
         </main>
       </div>
