@@ -6,13 +6,7 @@ import WriteReviewPage from './pages/WriteReviewPage';
 import CompanyReviewsPage from './pages/CompanyReviewsPage';
 import Reviews from './pages/Reviews';
 import AllCompaniesPage from './pages/AllCompaniesPage';
-import AuthGuard from './components/AuthGuard.jsx';
-import { awsConfig } from './aws-exports';
-import { Amplify } from 'aws-amplify';
 
-
-
-Amplify.configure(awsConfig);
 
 
 function App() {
@@ -22,10 +16,10 @@ function App() {
         <main className="main-content">
           <Routes>
             <Route path="/" element={<LandingPage />} />
-            <Route path="/write-review" element={<AuthGuard><WriteReviewPage /></AuthGuard>} />
-            <Route path="/reviews" element={<AuthGuard><Reviews /></AuthGuard>} />
-            <Route path="/companies/:companyName/reviews" element={<AuthGuard><CompanyReviewsPage /></AuthGuard>} />
-            <Route path="/companies" element={<AuthGuard><AllCompaniesPage /></AuthGuard>} />
+            <Route path="/write-review" element={<WriteReviewPage />} />
+            <Route path="/reviews" element={<Reviews />} />
+            <Route path="/companies/:companyName/reviews" element={<CompanyReviewsPage />}/>
+            <Route path="/companies" element={<AllCompaniesPage />} />
           </Routes>
         </main>
       </div>

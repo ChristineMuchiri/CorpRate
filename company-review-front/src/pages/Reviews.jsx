@@ -167,7 +167,7 @@ export default function Reviews() {
           {/* Feedback Section */}
           <div className='feedback-section'>
             <button className="feedback-button" onClick={() => handleLikeReview(review.PK, review.SK, index)}><ThumbsUp size={15}/> Helpful {review.likes > 0 ? `(${review.likes})` : ''}</button>
-            <button className="feedback-button flag" onClick={() => console.log('Flag clicked')}>🚩 Flag Review</button>
+            
 
           <button className='view-company-reviews'>
         <Link to={`/companies/${review.companyName}/reviews`} className="view-company-link">View Company</Link>
