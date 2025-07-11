@@ -30,6 +30,15 @@ Resources:
         AllowOrigins: 
           - http://localhost:5173
         MaxAge: 300
+      Auth:
+        Authorizers:
+          CognitoAuth:
+            IdentitySource: "$request.header.Authorization"
+            JwtConfiguration:
+              audience:
+                - !Ref CorpRateAppClient
+              issuer: !Sub "https://cognito-idp.${AWS::Region}.amazonaws/${CorpRateUserPool}"
+        DefaultAuthorizer: CognitoAuth
 # DynamoDB Table
   CorpRateTable:
     Type: AWS::DynamoDB::Table
@@ -80,6 +89,8 @@ Resources:
             Path: /submit-review
             Method: POST
             ApiId: !Ref CorpRateHttpApi
+            Auth:
+              Authorizer: CognitoAuth
       Policies:
         - AmazonDynamoDBFullAccess
         
@@ -103,6 +114,8 @@ Resources:
             Path: /companies/{companyName}/reviews
             Method: GET
             ApiId: !Ref CorpRateHttpApi
+            Auth:
+              Authorizer: CognitoAuth
       Policies:
         - AmazonDynamoDBReadOnlyAccess
   
@@ -126,6 +139,8 @@ Resources:
             Path: /companies
             Method: GET
             ApiId: !Ref CorpRateHttpApi
+            Auth:
+              Authorizer: CognitoAuth
       Policies: 
         - AmazonDynamoDBReadOnlyAccess
   # Get recent reviews Fuunction
@@ -149,6 +164,8 @@ Resources:
             Path: /reviews
             Method: GET
             ApiId: !Ref CorpRateHttpApi
+            Auth:
+              Authorizer: CognitoAuth
       Policies:
         - AmazonDynamoDBReadOnlyAccess
   # Like Review Function
@@ -171,6 +188,8 @@ Resources:
             Path: /like-review
             Method: POST
             ApiId: !Ref CorpRateHttpApi
+            Auth:
+              Authorizer: CognitoAuth
       Policies:
         - AmazonDynamoDBFullAccess  
   # Cognito User Pool
@@ -210,12 +229,14 @@ Resources:
       DefaultRedirectURI: http://localhost:5173/
       IdTokenValidity: 30
       LogoutURLs:
-        - http://localhost:5173/                                                                                                                                                                                                                                                                                                                                               
+        - http://localhost:5173/                     
       PreventUserExistenceErrors: ENABLED
       ReadAttributes:
         - email
         - email_verified
       RefreshTokenValidity: 10
+      SupportedIdentityProviders:
+        - COGNITO
       TokenValidityUnits:
         AccessToken: minutes
         IdToken: minutes
@@ -227,7 +248,9 @@ Resources:
     Properties:
       UserPoolId: !Ref CorpRateUserPool
       Domain: "corprate-dev"
-        
+  
+  
+
 
 Outputs:
   
