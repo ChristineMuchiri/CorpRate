@@ -14,7 +14,9 @@ import { AuthProvider } from './auth/AuthProvider';
 
 function App() {
   return (
+    
     <Router>
+      <AuthProvider>
       <div className="app-container">
         <main className="main-content">
           <Routes>
@@ -29,7 +31,9 @@ function App() {
           </Routes>
         </main>
       </div>
+      </AuthProvider>
     </Router>
+    
   );
 }
 
