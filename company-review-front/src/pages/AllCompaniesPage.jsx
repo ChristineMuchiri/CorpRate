@@ -33,7 +33,7 @@ export default function AllCompaniesPage() {
         }
 
         const data = await response.json();
-        console.log(data)
+        
         // Handle both direct array response and potential stringified body
         let companiesData = Array.isArray(data) ? data : [];
         

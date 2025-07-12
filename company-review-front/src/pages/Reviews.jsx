@@ -65,7 +65,7 @@ export default function Reviews() {
           throw new Error(`Error ${response.status}: ${response.statusText}`);
         }
         const data = await response.json();
-        console.log(data)
+        
         
 
         setReviews(data.map(review => ({ ...review, likes: review.likes || 0 })));
