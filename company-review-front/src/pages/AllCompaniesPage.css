@@ -1,7 +1,7 @@
 /* AllCompaniesPage.css */
 
 .companies-overview {
-  max-width: 70%;
+  max-width:90%;
   margin: 0 auto;
   padding: 2rem;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -134,7 +134,7 @@ h1 {
   justify-content: center;
   width: 40px;
   height: 40px;
-  background-color: #f5c518;
+  background-color: #3b11af;
   color: white;
   border-radius: 50%;
   font-weight: bold;
@@ -152,7 +152,7 @@ h1 {
 .review-button {
   display: inline-block;
   padding: 0.6rem 1.2rem;
-  background-color: #f5c518;
+  background-color: #4c2fe0;
   color: #333;
   border-radius: 5px;
   text-decoration: none;
@@ -161,7 +161,7 @@ h1 {
 }
 
 .review-button:hover {
-  background-color: #e0b416;
+  background-color: #2d0fc1;
 }
 /* Mobile Responsive Adjustments */
 @media (max-width: 768px) {
