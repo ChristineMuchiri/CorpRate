@@ -28,7 +28,7 @@ Resources:
           - OPTIONS
           - GET
         AllowOrigins: 
-          - http://localhost:5173
+          - https://corprate.xyz
         MaxAge: 300
       Auth:
         Authorizers:
@@ -224,12 +224,13 @@ Resources:
         - openid
         - profile
       CallbackURLs:
-        - http://localhost:5173/
+        - https://corprate.xyz/
+        - https://corprate.xyz/oauth-callback
       ClientName: corpRate-app-client
-      DefaultRedirectURI: http://localhost:5173/
+      DefaultRedirectURI: https://corprate.xyz/
       IdTokenValidity: 30
       LogoutURLs:
-        - http://localhost:5173/                     
+        - https://corprate.xyz/                     
       PreventUserExistenceErrors: ENABLED
       ReadAttributes:
         - email
