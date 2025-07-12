@@ -2,11 +2,12 @@ import boto3
 import json
 import os
 from boto3.dynamodb.conditions import Key
+from utils import with_cors
 
 dynamodb = boto3.resource('dynamodb')
 table_name = os.environ.get('TABLE_NAME')
 table = dynamodb.Table(table_name)
-
+@with_cors
 def lambda_handler(event, context):
     print("Incoming event:", json.dumps(event)) 
     try:
@@ -45,3 +46,4 @@ def lambda_handler(event, context):
             "statusCode": 500,
             "body": json.dumps({"error": str(e)})
         }
+    

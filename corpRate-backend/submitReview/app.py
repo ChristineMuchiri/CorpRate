@@ -2,8 +2,10 @@ import boto3
 import json
 import os
 from datetime import datetime, timezone
+from utils import with_cors
 
 dynamodb = boto3.resource('dynamodb')
+@with_cors
 def lambda_handler(event, context):
     # Get the table name from environment variables
     table_name = os.environ.get('TABLE_NAME')
@@ -69,6 +71,6 @@ def lambda_handler(event, context):
         }
 
     return {
-        'statusCode': 200,
-        'body': json.dumps('Review submitted successfully.')
+        "statusCode": 200,
+        "body": json.dumps({ "message": "ok" })
     }

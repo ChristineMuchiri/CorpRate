@@ -2,12 +2,12 @@ import boto3
 import json
 import os
 from boto3.dynamodb.conditions import Key
-
+from utils import with_cors
 
 table_name = os.environ.get('TABLE_NAME')
 dynamodb = boto3.resource('dynamodb')
 table =dynamodb.Table(table_name)
-
+@with_cors
 def lambda_handler(event, context):
     path_parameters = event.get('pathParameters', {})
     company_name = path_parameters.get('companyName').lower()

@@ -4,6 +4,7 @@ from datetime import datetime,timedelta,timezone
 import json
 from boto3.dynamodb.types import TypeDeserializer
 from decimal import Decimal
+from utils import with_cors
 
 dynamodb = boto3.client('dynamodb')
 table_name = os.environ.get('TABLE_NAME')
@@ -17,7 +18,7 @@ def decimal_default(obj):
 def deserialize_dynamodb_item(item):
     return {k: deserializer.deserialize(v) for k, v in item.items()}
  
-
+@with_cors
 def lambda_handler(event, context):
     # ISO stamp for 3 days ago?
     three_days_ago = (datetime.now(timezone.utc) - timedelta(days=3)).isoformat()
