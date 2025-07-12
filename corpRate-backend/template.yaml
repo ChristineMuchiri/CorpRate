@@ -23,6 +23,7 @@ Resources:
       CorsConfiguration:
         AllowHeaders:
           - Content-Type
+          - Authorization
         AllowMethods:
           - POST
           - OPTIONS
