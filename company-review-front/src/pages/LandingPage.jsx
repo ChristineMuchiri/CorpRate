@@ -26,20 +26,11 @@ function LandingPage(){
         <div className="logo-container">
           <span className="logo-text">CorpRate</span>
           </div>
-        {/* Mobile Menu Button */}
-          <button 
-            className="mobile-menu-button"
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          >
-            {isMobileMenuOpen ? <FaTimes /> : <FaBars />}
-          </button>
           
-          {/* Updated Nav with mobile classes */}
-          <nav className={`nav-links ${isMobileMenuOpen ? 'mobile-open' : ''}`}>
             <Link to="/companies" className="nav-link">Companies</Link>
             <Link to="/reviews" className="nav-link">Reviews</Link>
             <Link to="/write-review" className="nav-link">Write Review</Link>
-          </nav>
+          
         </div>
       </header> 
 
