@@ -45,83 +45,76 @@ h1 {
 
 .companies-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1rem;
+  gap: 1.5rem;
+  padding: 1rem;
 }
-@media (max-width: 768px) {
-  .companies-grid {
-    grid-template-columns: 1fr;
-  }
-}
+
+
 .company-card {
-  background-color: #ffffff;
-  border: 1px solid #e0e0e0;
-  border-radius: 12px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   padding: 1.5rem;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
-  overflow: hidden;
-  width: 100%;
 }
 
 .company-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
 }
 
 .company-card h2 {
-  font-size: 1.5rem;
-  margin-bottom: 0.8rem;
-  color: #007bff;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  margin-bottom: 1rem;
+  font-size: 1.4rem;
 }
 
 .company-rating {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-weight: bold;
-  margin-bottom: 1rem;
+  margin-bottom: 1.2rem;
 }
 
+
 .overall-rating {
-  font-size: 1.8rem;
-  color: #2ecc71;
+  display: flex;
+  align-items: center;
 }
 
 .review-count {
-  font-size: 0.95rem;
-  color: #7f8c8d;
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  color: #666;
+  font-size: 0.9rem;
 }
 
 .rating-details {
   display: grid;
-  grid-template-columns: repeat(2, 1fr); /* 2 items per row */
-  gap: 0.75rem;
-  margin-top: 1rem;
-  margin-bottom: 1rem;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  margin-bottom: 1.5rem;
 }
+
 
 
 .rating-item {
-  background-color: #f3f4f6;
-  padding: 0.5rem 1rem;
-  border-radius: 999px;
   display: flex;
-  justify-content: space-between; /* space between label and value */
+  justify-content: space-between;
   align-items: center;
-  font-size: 0.9rem;
-  font-weight: 500;
-  box-shadow: inset 0 0 0 1px #e5e7eb;
-  width: 100%; /* ensure full width inside the grid cell */
 }
-
 
 .rating-category {
-  font-weight: 500;
-  flex-grow: 1;
+  color: #666;
+  font-size: 0.9rem;
 }
+
 .rating-value {
-  text-align: right;
+  font-weight: 600;
+  color: #333;
 }
 .loading, .error {
   text-align: center;
@@ -136,14 +129,16 @@ h1 {
   margin-bottom: 20px;
 }
 .company-initials {
-  background-color: #034388;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background-color: #f5c518;
   color: white;
-  padding: 6px 12px;
-  border-radius: 8px;
-  margin-right: 12px;
-  font-size: 1.1rem;
+  border-radius: 50%;
   font-weight: bold;
-  display: inline-block;
+  font-size: 1.2rem;
 }
 .company-name {
   color: #000; /* Black */
@@ -151,21 +146,71 @@ h1 {
   font-weight: 600;
 }
 .reviews-page {
-  margin-top: 1.5rem;
-  text-align: right;
+  text-align: center;
 }
 
-.reviews-page .review-button {
-  background-color: #3d96f6;
-  color: white;
-  padding: 0.5rem 1rem;
-  border-radius: 15px;
+.review-button {
+  display: inline-block;
+  padding: 0.6rem 1.2rem;
+  background-color: #f5c518;
+  color: #333;
+  border-radius: 5px;
   text-decoration: none;
   font-weight: 500;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.2s ease;
 }
 
-.reviews-page .review-button:hover {
-  background-color: #0056b3;
+.review-button:hover {
+  background-color: #e0b416;
+}
+/* Mobile Responsive Adjustments */
+@media (max-width: 768px) {
+  .companies-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    padding: 0.5rem;
+  }
+
+  .company-card {
+    padding: 1rem;
+  }
+
+  .company-card h2 {
+    font-size: 1.2rem;
+  }
+
+  .company-initials {
+    width: 36px;
+    height: 36px;
+    font-size: 1rem;
+  }
+
+  .rating-details {
+    grid-template-columns: 1fr;
+    gap: 0.8rem;
+  }
+
+  .rating-item {
+    padding: 0.3rem 0;
+  }
+
+  .review-button {
+    width: 100%;
+    padding: 0.7rem;
+    font-size: 0.9rem;
+  }
 }
 
+/* Tablet/Medium Screens */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .companies-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Desktop/Large Screens */
+@media (min-width: 1025px) {
+  .companies-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
