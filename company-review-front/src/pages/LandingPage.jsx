@@ -1,5 +1,6 @@
 // src/pages/LandingPage.jsx
 import {React, useState} from 'react';
+import { FaBars, FaTimes } from 'react-icons/fa';
 import './LandingPage.css';
 import { Link, useNavigate } from 'react-router-dom';
 
