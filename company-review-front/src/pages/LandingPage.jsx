@@ -4,6 +4,7 @@ import './LandingPage.css';
 import { Link, useNavigate } from 'react-router-dom';
 
 function LandingPage(){
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
   const navigate = useNavigate();
 
@@ -24,13 +25,21 @@ function LandingPage(){
         <div className="logo-container">
           <span className="logo-text">CorpRate</span>
           </div>
-        <nav className="nav-links">
-          <Link to="/companies" className="nav-link">Companies</Link>
-          <Link to="/reviews" className="nav-link">Reviews</Link>
-          <Link to="/write-review" className="nav-link">Write Review</Link>
-        </nav>
+        {/* Mobile Menu Button */}
+          <button 
+            className="mobile-menu-button"
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          >
+            {isMobileMenuOpen ? <FaTimes /> : <FaBars />}
+          </button>
+          
+          {/* Updated Nav with mobile classes */}
+          <nav className={`nav-links ${isMobileMenuOpen ? 'mobile-open' : ''}`}>
+            <Link to="/companies" className="nav-link">Companies</Link>
+            <Link to="/reviews" className="nav-link">Reviews</Link>
+            <Link to="/write-review" className="nav-link">Write Review</Link>
+          </nav>
         </div>
-      
       </header> 
 
       {/* Hero Section */} 
