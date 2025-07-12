@@ -3,13 +3,21 @@ import json
 import os
 from decimal import Decimal
 from boto3.dynamodb.conditions import Key
-from utils import with_cors
 
 table_name = os.environ.get('TABLE_NAME')
 dynamodb = boto3.resource('dynamodb')
 table = dynamodb.Table(table_name)
-@with_cors
 def lambda_handler(event, context):
+    if event['requestContext']['http']['method'] == 'OPTIONS':
+        return {
+            "statusCode": 200,
+            "headers": {
+                "Access-Control-Allow-Origin": "https://www.corprate.xyz",
+                "Access-Control-Allow-Headers": "Content-Type,Authorization",
+                "Access-Control-Allow-Methods": "GET,POST,OPTIONS"
+            },
+            "body": ""
+        }
     try:
         response = table.scan()
         items = response.get('Items', [])
@@ -55,12 +63,22 @@ def lambda_handler(event, context):
             })
         print(result)   
         return {
-            'statusCode': 200,
-            'body': json.dumps(result)
-        }
+        "statusCode": 200,
+        "headers": {
+            "Access-Control-Allow-Origin": "https://www.corprate.xyz",
+            "Access-Control-Allow-Headers": "Content-Type,Authorization",
+            "Access-Control-Allow-Methods": "GET,POST,OPTIONS"
+        },
+        "body": json.dumps(result)
+    }
     except Exception as e:
         print("Error:", str(e))
         return {
             'statusCode': 500,
+            'headers': {
+                'Access-Control-Allow-Origin': 'https://www.corprate.xyz',
+                'Access-Control-Allow-Headers': 'Content-Type,Authorization',
+                'Access-Control-Allow-Methods': 'GET,POST,OPTIONS'
+            },
             'body': json.dumps({'error': 'Could not retrieve company summaries'})
         }

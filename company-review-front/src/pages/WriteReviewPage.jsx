@@ -32,7 +32,13 @@ function WriteReviewPage() {
     const [loading, setLoading] = useState(false);
 
 
-    
+    const validateForm = () => {
+    const errors = {};
+    if (!companyName.trim()) errors.companyName = "Company name is required";
+    if (!pros.trim()) errors.pros = "Pros are required";
+    if (!cons.trim()) errors.cons = "Cons are required";
+    return errors;
+    };
     
 
     const [ratings, setRatings] = useState(
@@ -65,6 +71,12 @@ function WriteReviewPage() {
         };
     
         try {
+            // Validate form data
+            const formErrors = validateForm();
+            if (Object.keys(formErrors).length > 0) {
+            setErrors(formErrors);
+              return;
+        }
             const response = await fetch(`${API_URL}/submit-review`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -196,27 +208,28 @@ function WriteReviewPage() {
           <h3>Your Review</h3>
           <label>
             What are the pros of working here? *
-            <input
-              type="text"
+            <textarea
               value={pros}
               onChange={(e) => setPros(e.target.value)}
               required
+              rows={3}
               placeholder="Share the positive aspects of working at this company"
             />
           </label>
           <label>
             What are the cons of working here? *
-            <input
-              type="text"
+            <textarea
               value={cons}
               onChange={(e) => setCons(e.target.value)}
               required
+              rows={3}
               placeholder="Share the challenges or areas of improvement"
             />
           </label>
           <label>
-            Any advice for management?            <input
-              type="text"
+            Any advice for management?            
+            <textarea
+              rows={3}
               value={advice}
               onChange={(e) => setAdvice(e.target.value)}
               placeholder="What suggestions do you have for leadership?"
