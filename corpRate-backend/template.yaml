@@ -28,7 +28,7 @@ Resources:
           - OPTIONS
           - GET
         AllowOrigins: 
-          - https://corprate.xyz
+          - https://www.corprate.xyz
         MaxAge: 300
       Auth:
         Authorizers:
