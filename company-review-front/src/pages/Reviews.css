@@ -29,14 +29,14 @@
   color: #3d96f6;
 }
 .reviews-container {
-  width: 60%;
+  width: 80%;
   margin: 2rem auto 1rem;
   padding: 0 1rem;
   text-align: center;
 }
 
 .reviews-list {
-  width: 60%;
+  width: 80%;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
