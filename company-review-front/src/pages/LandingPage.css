@@ -38,16 +38,27 @@
 }
 
 /* Nav links */
-.nav-link {
-  margin-left: 1.5rem;
-  text-decoration: none;
-  color: #333;
-  font-weight: 500;
-  transition: color 0.2s ease;
+.nav-links-container {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap; /* allows wrapping if screen is too narrow */
 }
 
-.nav-link:hover {
+/* Touch-friendly nav link styling */
+.nav-link {
+  padding: 0.5rem 1rem;
+  text-decoration: none;
   color: #0073e6;
+  font-weight: 500;
+  font-size: 1rem;
+  border-radius: 6px;
+  transition: background-color 0.2s ease;
+}
+
+.nav-link:hover,
+.nav-link:active {
+  background-color: #e6f0ff;
+  color: #005bb5;
 }
 /* Hero Section */
 .hero-section {
@@ -175,6 +186,11 @@
     margin: 0.25rem 0;
     font-size: 1.1rem;
   }
+  .nav-links-container {
+  overflow-x: auto;
+  white-space: nowrap;
+  -webkit-overflow-scrolling: touch;
+}
   .logo-container {
     margin-bottom: 1rem;
   }
