@@ -103,14 +103,9 @@ function LandingPage(){
         </div>
           <p className="footer-description">
             Empowering job seekers with honest, anonymous workplace insights. Building transparency in the job market, one review at a time.</p>  
-        <div className="footer-links">
-          <a href="/about">About Us</a>
-          <a href="/privacy">Privacy Policy</a>
-          <a href="/terms">Terms of Service</a>
-          <a href="/contact">Contact</a>
-        </div>
+        
         <div className="footer-copyright">
-          &copy; {new Date().getFullYear()} WorkReviews. All rights reserved.
+          &copy; {new Date().getFullYear()} CorpRate. All rights reserved.
         </div>
       </footer>
     </div>
