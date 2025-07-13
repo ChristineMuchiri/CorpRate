@@ -49,9 +49,120 @@
 .nav-link:hover {
   color: #0073e6;
 }
+/* Hero Section */
+.hero-section {
+  background: linear-gradient(to bottom right, #e6f0ff, #ffffff);
+  padding: 3rem 1.5rem;
+  text-align: center;
+}
+
+.hero-section h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #0b2e59;
+  margin-bottom: 1rem;
+}
+
+.hero-text {
+  font-size: 1rem;
+  color: #333;
+  max-width: 600px;
+  margin: 0 auto 2rem;
+  line-height: 1.6;
+}
+
+/* Search Area */
+.search-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: center;
+  justify-content: center;
+}
+
+.search-area {
+  width: 100%;
+  max-width: 500px;
+}
+
+.search-input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  outline: none;
+  transition: border 0.2s;
+}
+
+.search-input:focus {
+  border-color: #0073e6;
+}
+
+/* Search Button */
+.search-button {
+  padding: 0.75rem 2rem;
+  font-size: 1rem;
+  background-color: #0073e6;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.search-button:hover {
+  background-color: #005bb5;
+}
 
 
+.share-content {
+  padding: 2rem 1rem;
+  text-align: center;
+  background-color: #f5f7fa; /* light neutral tone — you can change */
+  border-radius: 8px; /* optional: adds smooth corners */
+}
 
+/* Optional container override if needed */
+.share-experience {
+  padding: 2rem 1rem;
+  background-color: #f0f0f0; /* section-wide background */
+}
+
+/* Style the "Write a Review" button */
+.review-button {
+  margin-top: 1rem;
+  background-color: #0073e6; /* new color — vibrant blue */
+  color: white;
+  font-size: 0.9rem;
+  padding: 0.6rem 1.2rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.review-button:hover {
+  background-color: #005bb5; /* darker on hover */
+}
+
+.page-footer {
+  padding: 2rem 1rem;
+  background-color: #12084e; /* Or any other color you prefer */
+  color: white; /* Ensure text is readable */
+  text-align: center; /* Center all text including CorpRate */
+}
+
+.reviews-footer {
+  margin-bottom: 1rem;
+}
+
+.footer-text {
+  font-size: 1.5rem;
+  font-weight: bold;
+  display: block;
+}
 
 @media (max-width: 768px) {
   .header-container {
