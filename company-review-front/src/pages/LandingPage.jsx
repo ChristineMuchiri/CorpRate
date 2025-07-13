@@ -79,33 +79,8 @@ function LandingPage(){
         </div>
       </section>
 
-      {/* Featured Companies Section */}
-
-      <section className="featured-companies">
-        <h2>Featured Companies</h2>
-        <div className="companies-grid">
-          <div className="company-card">
-            <h3>TschCorp</h3>
-            <div className="company-rating">42</div>
-            <p className="review-count">156 reviews</p>
-          </div>
-          <div className="company-card">
-            <h3>StartupXYZ</h3>
-            <div className="company-rating">38</div>
-            <p className="review-count">89 reviews</p>
-          </div>
-          <div className="company-card">
-            <h3>Meg4Corp</h3>
-            <div className="company-rating">35</div>
-            <p className="review-count">234 reviews</p>
-          </div>
-          <div className="company-card">
-            <h3>InnovateLab</h3>
-            <div className="company-rating">45</div>
-            <p className="review-count">67 reviews</p>
-          </div>
-        </div>
-      </section>
+      
+      
 
       {/* Middle Section - Share Experience */}
       <section className="share-experience">
