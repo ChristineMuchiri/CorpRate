@@ -54,7 +54,13 @@
 
   .page-footer {
     padding: 2rem 1rem;
+    background-color: #0d0d0d; /* Or any other color you prefer */
+    color: white; /* Ensure text is readable */
+    text-align: center; /* Center all text including CorpRate */
   }
+  .reviews-footer {
+  margin-bottom: 1rem;
+}
   .footer-links {
     display: flex;
     flex-direction: column;
@@ -66,6 +72,11 @@
     font-size: 0.9rem;
     padding: 0.5rem 0;
   }
+  .footer-text {
+  font-size: 1.5rem;
+  font-weight: bold;
+  display: block;
+}
   .footer-description {
     font-size: 0.9rem;
     padding: 0 1rem;
