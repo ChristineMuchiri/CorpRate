@@ -47,10 +47,36 @@
     padding: 1rem;
   }
 
-  .share-content {
-    padding: 1rem;
-    text-align: center;
-  }
+ .share-content {
+  padding: 2rem 1rem;
+  text-align: center;
+  background-color: #f5f7fa; /* light neutral tone — you can change */
+  border-radius: 8px; /* optional: adds smooth corners */
+}
+
+/* Optional container override if needed */
+.share-experience {
+  padding: 2rem 1rem;
+  background-color: #f0f0f0; /* section-wide background */
+}
+
+/* Style the "Write a Review" button */
+.review-button {
+  margin-top: 1rem;
+  background-color: #0073e6; /* new color — vibrant blue */
+  color: white;
+  font-size: 0.9rem;
+  padding: 0.6rem 1.2rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.review-button:hover {
+  background-color: #005bb5; /* darker on hover */
+}
+
 
   .page-footer {
     padding: 2rem 1rem;
