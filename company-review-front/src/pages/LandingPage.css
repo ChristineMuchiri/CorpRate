@@ -55,15 +55,14 @@
 }
 
 /* Optional container override if needed */
-.share-experience {
+  .share-experience {
   padding: 1rem 1rem;
   background-color: #cdcdeb; /* section-wide background */
 }
 
 /* Style the "Write a Review" button */
-.review-button {
+  .review-button {
   margin-top: 1rem;
-  background-color: #d4690b; /* new color — vibrant blue */
   color: white;
   font-size: 0.9rem;
   padding: 0.6rem 1.2rem;
@@ -73,7 +72,7 @@
   transition: background-color 0.3s ease;
 }
 
-.review-button:hover {
+  .review-button:hover {
   background-color: #005bb5; /* darker on hover */
 }
 
