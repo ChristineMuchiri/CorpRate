@@ -56,31 +56,6 @@ function LandingPage(){
         </div>
       </section>
 
-      {/* Stats Section */}
-      <section className="stats-section">
-        <h2>Explore Companies</h2>
-        <div className="stats-grid">
-          <div className="stat-item">
-            <h3>10K+</h3>
-            <p>Active Users</p>
-          </div>
-          <div className="stat-item">
-            <h3>2.5K+</h3>
-            <p>Reviews Posted</p>
-          </div>
-          <div className="stat-item">
-            <h3>500+</h3>
-            <p>Companies Listed</p>
-          </div>
-          <div className="stat-item">
-            <h3>85%</h3>
-            <p>Verified Reviews</p>
-          </div>
-        </div>
-      </section>
-
-      
-      
 
       {/* Middle Section - Share Experience */}
       <section className="share-experience">
