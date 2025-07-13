@@ -28,13 +28,21 @@
     align-items: stretch;
     gap: 0.5rem;
   }
-  .search-input, .search-button {
+  .search-input {
     width: 90%;
     padding: 0.75rem;
     font-size: 1rem;
     min-height: 48px;
     border-radius: 10px;
     box-sizing: border-box;
+  }
+  .search-button {
+    width: 60%;
+    padding: 0.75rem;
+    font-size: 1rem;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
   }
 
   .stats-grid, .companies-grid {
