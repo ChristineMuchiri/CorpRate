@@ -27,11 +27,12 @@ function LandingPage(){
            <img src="/logo-app.png" alt="CorpRate logo" className="logo-image" />
           <span className="logo-text">CorpRate</span>
           </div>
-          
+          <div className="nav-links-container">
+
             <Link to="/companies" className="nav-link">Companies</Link>
             <Link to="/reviews" className="nav-link">Reviews</Link>
             <Link to="/write-review" className="nav-link">Write Review</Link>
-          
+          </div>
         </div>
       </header> 
 
