@@ -24,6 +24,7 @@ function LandingPage(){
       <header className="page-header">
         <div className="header-container">
         <div className="logo-container">
+           <img src="/logo-app.png" alt="CorpRate logo" className="logo-image" />
           <span className="logo-text">CorpRate</span>
           </div>
           
