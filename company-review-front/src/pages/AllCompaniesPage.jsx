@@ -107,25 +107,25 @@ export default function AllCompaniesPage() {
             
             <div className="rating-details">
               <div className="rating-item">
-                <span className="rating-category">Management</span>
+                <span className="rating-category">Management  </span>
                 <span className="rating-value">
                   {company.averageRatings['Management Quality'].toFixed(1)}
                 </span>
               </div>
               <div className="rating-item">
-                <span className="rating-category">Work-Life</span>
+                <span className="rating-category">Work-Life  </span>
                 <span className="rating-value">
                   {company.averageRatings['Work-Life Balance'].toFixed(1)}
                 </span>
               </div>
               <div className="rating-item">
-                <span className="rating-category">Career Growth</span>
+                <span className="rating-category">Career Growth  </span>
                 <span className="rating-value">
                   {company.averageRatings['Career Growth Opportunities'].toFixed(1)}
                 </span>
               </div>
               <div className="rating-item">
-                <span className="rating-category">Compensation</span>
+                <span className="rating-category">Compensation  </span>
                 <span className="rating-value">
                   {company.averageRatings['Compensation & Benefits'].toFixed(1)}
                 </span>

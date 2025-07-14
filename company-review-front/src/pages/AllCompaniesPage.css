@@ -194,8 +194,7 @@
 /* === MOBILE === */
 @media (max-width: 600px) {
   .review-header-bar {
-    flex-direction: column;
-    align-items: stretch;
+    flex-direction: row;
   }
 
   .heading-wrapper h1 {
