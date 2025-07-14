@@ -1,8 +1,8 @@
 /* Container */
 .review-container {
-  max-width: 1100px;
-  margin: 20px auto;
-  padding: 40px;
+  max-width: 850px;
+  margin: auto;
+  padding: 1.5rem;
   background-color: #f4f9ff; /* Light blue background */
   border-radius: 12px;
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
@@ -221,3 +221,23 @@ button[disabled] {
   color: #555;
 }
 
+/* === MOBILE OPTIMIZATION === */
+@media (max-width: 746px) {
+  .review-container {
+    padding: 1rem;
+  }
+
+  .star-group {
+    flex-wrap: wrap;
+    gap: 0.25rem;
+  }
+
+  .inline-options {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .submit-button-container {
+    padding: 1rem 0;
+  }
+}
