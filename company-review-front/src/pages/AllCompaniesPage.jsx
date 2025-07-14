@@ -62,7 +62,13 @@ export default function AllCompaniesPage() {
   }, [API_URL]);
 
   if (loading) {
-    return <div className="loading">Loading company data...</div>;
+    return (
+  <div className="loading-dots">
+    <span>.</span>
+    <span>.</span>
+    <span>.</span>
+  </div>
+);
   }
 
   if (error) {
