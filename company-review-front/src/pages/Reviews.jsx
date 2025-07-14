@@ -80,7 +80,13 @@ export default function Reviews() {
     fetchRecentReviews();
   }, [API_URL]);
 
-  if (loading) return <div>Loading recent reviews...</div>
+  if (loading) return (
+  <div className="loading-dots">
+    <span>.</span>
+    <span>.</span>
+    <span>.</span>
+  </div>
+);
   if (error) return <div>Error: { error}</div>
   return (
   <>
