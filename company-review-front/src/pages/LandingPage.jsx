@@ -73,7 +73,25 @@ function LandingPage(){
                   onClick={() => navigate('/write-review')}>Write a Review</button>
         </div>
       </section>
-      
+      {/* How It Works Section */}
+      <section className="how-it-works">
+        <h2 className="how-title">How CorpRate Works</h2>
+        <div className="steps-container">
+          <div className="step">
+            <h4>1. Search</h4>
+            <p>Look up companies you're curious about and see what employees are saying.</p>
+          </div>
+        <div className="step">
+          <h4>2. Read</h4>
+          <p>Explore anonymous reviews about culture, management, and work-life balance.</p>
+        </div>
+      <div className="step">
+        <h4>3. Share</h4>
+        <p>Write your own honest, anonymous review and help others make informed choices.</p>
+      </div>
+      </div>
+      </section>
+
 
       
       {/* Footer */}

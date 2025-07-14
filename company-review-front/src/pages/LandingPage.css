@@ -184,7 +184,52 @@ body, html {
 .button-review:hover {
   background-color: #4f57f8;
 }
+/* === HOW IT WORKS SECTION === */
+.how-it-works {
+  padding: 4rem 1rem;
+  text-align: center;
+  border-bottom: 1px solid #e5e7eb;
+}
 
+.how-title {
+  font-size: 2.2rem;
+  color: #111827;
+  margin-bottom: 4rem;
+}
+
+.steps-container {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.step {
+  flex: 1 1 250px;
+  background-color: white;
+  padding: 1.5rem;
+  border-radius: 1rem;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  transition: transform 0.2s ease;
+}
+
+.step:hover {
+  transform: translateY(-4px);
+}
+
+.step h4 {
+  font-size: 1.25rem;
+  color: #2563eb;
+  margin-bottom: 0.5rem;
+}
+
+.step p {
+  font-size: 1rem;
+  color: #4b5563;
+  line-height: 1.6;
+}
 /* Footer */
 .page-footer {
   margin-top: auto;
@@ -274,5 +319,18 @@ body, html {
     width: 60%;
     margin: 0 auto;
     padding: 1rem;
+  }
+  .steps-container {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .step {
+    padding: 1.25rem;
+  }
+
+  .how-title {
+    font-size: 2rem;
+    color: #111827;
   }
 }
