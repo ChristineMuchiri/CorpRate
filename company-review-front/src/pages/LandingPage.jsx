@@ -37,7 +37,9 @@ function LandingPage(){
       </header> 
 
       {/* Hero Section */} 
+      
       <section className="hero-section">
+        
         <h1>Discover Your Next Dream Job</h1>
         <p className="hero-text">
           Get honest, anonymous insights about company culture, management, and work-life balance from real employees. 
@@ -67,10 +69,11 @@ function LandingPage(){
             Help others make better career choices by sharing your honest review about your workplace. 
             Your identity remains anonymous, but your insights are invaluable.
           </p>
-          <button className="review-button"
+          <button className="button-review"
                   onClick={() => navigate('/write-review')}>Write a Review</button>
         </div>
       </section>
+      
 
       
       {/* Footer */}
