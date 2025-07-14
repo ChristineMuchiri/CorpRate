@@ -16,7 +16,12 @@
   gap: 1rem;
 }
 
-.back-button, .review-button {
+.back-button {
+  color: #2563eb ;
+  background-color:ghostwhite;
+  text-decoration: underline;
+}
+.review-button {
   padding: 0.6rem 1rem;
   background-color: #2563eb;
   color: white;
@@ -115,7 +120,9 @@
 
 .rating-item {
   display: flex;
+  align-items: center;
   justify-content: space-between;
+  gap: 1rem;
   font-size: 0.95rem;
 }
 
