@@ -59,21 +59,7 @@ function LandingPage(){
           <button className="search-button" onClick={handleSearch}>Explore Companies</button>
         </div>
       </section>
-
-
-      {/* Middle Section - Share Experience */}
-      <section className="share-experience">
-        <div className="share-content">
-          <h2>Share Your Experience</h2>
-          <p className="share-description">
-            Help others make better career choices by sharing your honest review about your workplace. 
-            Your identity remains anonymous, but your insights are invaluable.
-          </p>
-          <button className="button-review"
-                  onClick={() => navigate('/write-review')}>Write a Review</button>
-        </div>
-      </section>
-      {/* How It Works Section */}
+        {/* How It Works Section */}
       <section className="how-it-works">
         <h2 className="how-title">How CorpRate Works</h2>
         <div className="steps-container">
@@ -91,6 +77,20 @@ function LandingPage(){
       </div>
       </div>
       </section>
+
+      {/* Middle Section - Share Experience */}
+      <section className="share-experience">
+        <div className="share-content">
+          <h2>Share Your Experience</h2>
+          <p className="share-description">
+            Help others make better career choices by sharing your honest review about your workplace. 
+            Your identity remains anonymous, but your insights are invaluable.
+          </p>
+          <button className="button-review"
+                  onClick={() => navigate('/write-review')}>Write a Review</button>
+        </div>
+      </section>
+      
 
 
       
