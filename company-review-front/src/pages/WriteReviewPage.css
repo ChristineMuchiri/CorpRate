@@ -195,15 +195,14 @@ button[disabled] {
   display: flex;
   align-items: center;
   gap: 6px;
-  white-space: nowrap;
-  overflow-x: auto;
+  flex: 1;
+  justify-content: flex-end;
 }
 
 .star {
   font-size: 24px;
   color: #cbd5e0;
   cursor: pointer;
-  color: #d1d5db;
   user-select: none;
   transition: color 0.2s ease-in-out;
   flex-shrink: 0;
