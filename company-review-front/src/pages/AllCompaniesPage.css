@@ -31,7 +31,10 @@
   transition: background 0.2s ease;
 }
 
-.back-button:hover, .review-button:hover {
+.back-button:hover {
+  background-color: rgb(227, 226, 223);
+} 
+.review-button:hover {
   background-color: #1e40af;
 }
 
