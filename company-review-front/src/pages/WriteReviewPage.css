@@ -201,13 +201,15 @@ button[disabled] {
 
 .star {
   font-size: 24px;
-  color: #ccc;
+  color: #cbd5e0;
   cursor: pointer;
-  transition: color 0.2s ease;
+  user-select: none;
+  transition: color 0.2s ease-in-out;
+  flex-shrink: 0;
 }
 
 .star.filled {
-  color: #f5b301;
+  color: #facc15;
 }
 
 .star:hover,
