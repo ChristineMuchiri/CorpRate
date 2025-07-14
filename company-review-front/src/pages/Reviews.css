@@ -17,7 +17,7 @@
 
 .nav-links a {
   text-decoration: none;
-  color: #374151;
+  color: #2563eb;
   font-weight: 500;
   padding: 0.5rem 0.75rem;
   border-radius: 0.375rem;
@@ -42,7 +42,7 @@
 }
 
 .reviews-list {
-  width: 90%;
+  width: 70%;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
@@ -219,4 +219,10 @@
     background-color: #f3f4f6;
     border-radius: 0.375rem;
   }
+  .reviews-container {
+  width: 90%;
+  margin: 2rem auto 1rem;
+  padding: 0 1rem;
+  text-align: center;
+}
 }
