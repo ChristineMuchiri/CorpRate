@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { titleCase, formatDate } from '../utils.js';
 import {Calendar, ThumbsDown, ThumbsUp, Building2, MapPin} from 'lucide-react';
 import { motion} from 'framer-motion';
+import { useAuth } from './auth/useAuth';
 
 
 function renderStars(rating) {
@@ -26,35 +27,48 @@ function renderStars(rating) {
   return stars;
 }
 
-export default function Reviews() {
+export default function Reviews({review}) {
   const [reviews, setReviews] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [liked, setLiked] = useState(false);
+  const [likes, setLikes] = useState(review.likes || 0);
   const API_URL = import.meta.env.VITE_API_BASE_URL;
   
-  const handleLikeReview = async (PK, SK, index) => {
-  try {
-    const response = await fetch(`${API_URL}/like-review`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ PK, SK })
-    });
+  const handleLikeReview = async () => {
+    if (liked || !idToken) return;
 
-    if (!response.ok) {
-      throw new Error(`Failed to like review: ${response.statusText}`);
+    try {
+      const res = await fetch(`${API_URL}/like-review`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${idToken}`,
+        },
+        body: JSON.stringify({
+          PK: review.PK,
+          SK: review.SK
+        }),
+      });
+    const data = await response.json();
+
+    if (res.ok) {
+        setLiked(true);
+        setLikes(data.likes);
+      } else {
+        if (data.message === 'Already liked this review') {
+          setLiked(true);
+        } else {
+          console.error(data.error || data.message);
+        }
+      }
+
+    } catch (err) {
+      console.error("Like failed", err);
     }
+  };
 
-    const result = await response.json();
-    console.log('Review liked:', result);
-    const updated = [...reviews];
-    updated[index].likes = parseInt(result.likes);
-    setReviews(updated);
-  } catch (error) {
-    console.error('Error liking review:', error.message);
-  }
-};
+    
 
 
   useEffect(() => {
@@ -172,7 +186,19 @@ export default function Reviews() {
           
           {/* Feedback Section */}
           <div className='feedback-section'>
-            <button className="feedback-button" onClick={() => handleLikeReview(review.PK, review.SK, index)}><ThumbsUp size={15}/> Helpful {review.likes > 0 ? `(${review.likes})` : ''}</button>
+            <button
+              className="feedback-button"
+              onClick={handleLikeReview}
+              disabled={liked}
+              style={{
+                opacity: liked ? 0.6 : 1,
+                cursor: liked ? 'not-allowed' : 'pointer',
+        }}
+      >
+        <ThumbsUp size={15} />
+        Helpful {likes > 0 ? `(${likes})` : ''}
+      </button>
+    
             
 
           <button className='view-company-reviews'>
