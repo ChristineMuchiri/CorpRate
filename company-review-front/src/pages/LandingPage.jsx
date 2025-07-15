@@ -1,6 +1,6 @@
 // src/pages/LandingPage.jsx
 import {React, useState} from 'react';
-import { FaBars, FaTimes } from 'react-icons/fa';
+import { FiSearch, FiBookOpen, FiEdit } from 'react-icons/fi';
 import './LandingPage.css';
 import { Link, useNavigate } from 'react-router-dom';
 
@@ -24,7 +24,7 @@ function LandingPage(){
       <header className="page-header">
         <div className="header-container">
         <div className="logo-container">
-           <img src="/logo-app.png" alt="CorpRate logo" className="logo-image" />
+           <img src="/logo-app-removebg-preview.png" alt="CorpRate logo" className="logo-image" />
           <span className="logo-text">CorpRate</span>
           </div>
           <div className="nav-links-container">
@@ -64,14 +64,17 @@ function LandingPage(){
         <h2 className="how-title">How CorpRate Works</h2>
         <div className="steps-container">
           <div className="step">
+            <FiSearch className="step-icon" />
             <h4>1. Search</h4>
             <p>Look up companies you're curious about and see what employees are saying.</p>
           </div>
         <div className="step">
+          <FiBookOpen className="step-icon" />
           <h4>2. Read</h4>
           <p>Explore anonymous reviews about culture, management, and work-life balance.</p>
         </div>
       <div className="step">
+        <FiEdit className="step-icon" />
         <h4>3. Share</h4>
         <p>Write your own honest, anonymous review and help others make informed choices.</p>
       </div>
