@@ -37,6 +37,12 @@ export default function OAuthCallbackHandler() {
       navigate("/landing-page?authError=true");
     }
   };
-
-  return <p>Signing in...</p>;
+    return (
+    <div className="flex items-center justify-center min-h-screen bg-gray-50">
+      <p className="text-lg font-medium text-gray-700 tracking-wide animate-pulse">
+      Signing in...
+      </p>
+    </div>
+);
+  
 }

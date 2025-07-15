@@ -38,9 +38,12 @@ export default function Reviews({review}) {
   
   const handleLikeReview = async () => {
     if (liked || !idToken) return;
+    console.log("hello")
+    console.log("idToken:", idToken)
 
     try {
-      console.log("idToken:", idToken)
+      
+      
       const res = await fetch(`${API_URL}/like-review`, {
         method: 'POST',
         headers: {
