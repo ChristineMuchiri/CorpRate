@@ -28,6 +28,7 @@ function renderStars(rating) {
 }
 
 export default function Reviews({review}) {
+  const { idToken } = useAuth();
   const [reviews, setReviews] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -39,11 +40,12 @@ export default function Reviews({review}) {
     if (liked || !idToken) return;
 
     try {
+      console.log("idToken:", idToken)
       const res = await fetch(`${API_URL}/like-review`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${idToken}`,
+          'Authorization': `Bearer ${idToken}`,
         },
         body: JSON.stringify({
           PK: review.PK,
