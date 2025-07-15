@@ -27,24 +27,25 @@ function renderStars(rating) {
   return stars;
 }
 
-export default function Reviews({review}) {
+export default function Reviews({review: initialReview }) {
   const { idToken } = useAuth();
   const [reviews, setReviews] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [liked, setLiked] = useState(false);
-  const [likes, setLikes] = useState(review.likes || 0);
+  const [likedReviews, setLikedReviews] = useState({});
   const API_URL = import.meta.env.VITE_API_BASE_URL;
   
-  const handleLikeReview = async () => {
-    if (liked || !idToken) return;
+  const handleLikeReview = async (reviewId) => {
+    if (likedReviews[reviewId] || !idToken) return;
     console.log("hello")
     console.log("idToken:", idToken)
 
     try {
+      const review = reviews.find(r => r.id === reviewId) || initialReview;
+      if (!review) return;
       
-      
-      const res = await fetch(`${API_URL}/like-review`, {
+      const response = await fetch(`${API_URL}/like-review`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -57,21 +58,26 @@ export default function Reviews({review}) {
       });
     const data = await response.json();
 
-    if (res.ok) {
-        setLiked(true);
-        setLikes(data.likes);
+    if (response.ok) {
+      setLikedReviews(prev => ({ ...prev, [reviewId]: true }));
+      if (initialReview) {
+        // Handle single review case
+        initialReview.likes = data.likes;
       } else {
-        if (data.message === 'Already liked this review') {
-          setLiked(true);
-        } else {
-          console.error(data.error || data.message);
-        }
+        // Handle list view case
+        setReviews(prev => prev.map(r =>
+          r.id === reviewId ? { ...r, likes: data.likes } : r
+        ));
       }
+    } else if (data.message === 'Already liked this review') {
+      setLikedReviews(prev => ({ ...prev, [reviewId]: true }));
+    }
 
     } catch (err) {
       console.error("Like failed", err);
     }
-  };
+  }
+};
 
     
 
@@ -216,4 +222,3 @@ export default function Reviews({review}) {
   </>
 );
 
-}
