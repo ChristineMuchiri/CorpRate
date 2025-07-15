@@ -161,6 +161,9 @@ export default function Reviews({ review: initialReview }) {
               </>
           )}
               </button>
+              <button className='view-company-reviews'>
+                <Link to={`/companies/${review.companyName}/reviews`} className="view-company-link">View Company</Link>
+              </button> 
             </div>
           </motion.div>
         ))}
