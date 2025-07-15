@@ -142,7 +142,7 @@ export default function Reviews({ review: initialReview }) {
             <div className='feedback-section'>
               <button
                 className={`feedback-button ${likedIndexes[index] ? 'liked' : ''}`}
-                onClick={() => handleLikeReview(review.id)}
+                onClick={() => handleLikeReview(review.PK, review.SK,index)}
                 disabled={likedIndexes[index]}
                 style={{
                     opacity: likedIndexes[index] ? 0.6 : 1,
