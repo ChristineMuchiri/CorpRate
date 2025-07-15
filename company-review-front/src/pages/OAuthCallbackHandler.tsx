@@ -38,8 +38,8 @@ export default function OAuthCallbackHandler() {
     }
   };
     return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-50">
-      <p className="text-lg font-medium text-gray-700 tracking-wide animate-pulse">
+    <div className="authentication">
+      <p className="signing-in">
       Signing in...
       </p>
     </div>

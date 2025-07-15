@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { titleCase, formatDate } from '../utils.js';
 import {Calendar, ThumbsDown, ThumbsUp, Building2, MapPin} from 'lucide-react';
 import { motion} from 'framer-motion';
-import { useAuth } from './auth/useAuth';
+import { useAuth } from '../auth/useAuth';
 
 
 function renderStars(rating) {
