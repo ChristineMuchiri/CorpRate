@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
+import './OAuthCallbackHandler.css'
 
 export default function OAuthCallbackHandler() {
   const [params] = useSearchParams();
@@ -38,11 +39,11 @@ export default function OAuthCallbackHandler() {
     }
   };
     return (
-    <div className="authentication">
-      <p className="signing-in">
-      Signing in...
-      </p>
-    </div>
+  <div className="authentication">
+    <img src="/logo-app-removebg-preview.png" alt="CorpRate logo" className="auth-logo pulse" />
+    <p className="signing-in">Signing in...</p>
+    <div className="loading-bar"></div>
+  </div>
 );
   
 }

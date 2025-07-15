@@ -141,15 +141,15 @@ export default function Reviews({ review: initialReview }) {
 
             <div className='feedback-section'>
               <button
-                className={`feedback-button ${likedReviews[review.id] ? 'liked' : ''}`}
+                className={`feedback-button ${likedIndexes[index] ? 'liked' : ''}`}
                 onClick={() => handleLikeReview(review.id)}
-                disabled={likedReviews[review.id]}
+                disabled={likedIndexes[index]}
                 style={{
-                    opacity: likedReviews[review.id] ? 0.6 : 1,
-                    cursor: likedReviews[review.id] ? 'not-allowed' : 'pointer',
+                    opacity: likedIndexes[index] ? 0.6 : 1,
+                    cursor: likedIndexes[index] ? 'not-allowed' : 'pointer',
                 }}
 >
-              {likedReviews[review.id] ? (
+              {likedIndexes[index] ? (
             <>
             <ThumbsUp size={15} />
                 Liked
