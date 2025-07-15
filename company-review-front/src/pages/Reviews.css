@@ -167,14 +167,14 @@
   background-color: #f0f0f0;
 }
 
-.feedback-button.flag {
-  border-color: #bc8f94;
-  color: #d6999f;
-}
-
 .feedback-button.flag:hover {
   background-color: #dc354510;
 }
+.feedback-button.liked {
+  color: green;
+  border-color: green;
+}
+
 
 .view-company-reviews {
   background: transparent;

@@ -141,18 +141,25 @@ export default function Reviews({ review: initialReview }) {
 
             <div className='feedback-section'>
               <button
-                className="feedback-button"
-                onClick={() => handleLikeReview(review.PK, review.SK, index)}
-                disabled={likedIndexes[index]}
+                className={`feedback-button ${likedReviews[review.id] ? 'liked' : ''}`}
+                onClick={() => handleLikeReview(review.id)}
+                disabled={likedReviews[review.id]}
                 style={{
-                  opacity: likedIndexes[index] ? 0.6 : 1,
-                  cursor: likedIndexes[index] ? 'not-allowed' : 'pointer',
+                    opacity: likedReviews[review.id] ? 0.6 : 1,
+                    cursor: likedReviews[review.id] ? 'not-allowed' : 'pointer',
                 }}
-              >
-                <ThumbsUp size={15} /> Helpful {likesMap[index] || review.likes > 0 ? `(${likesMap[index] || review.likes})` : ''}
-              </button>
-              <button className='view-company-reviews'>
-                <Link to={`/companies/${review.companyName}/reviews`} className="view-company-link">View Company</Link>
+>
+              {likedReviews[review.id] ? (
+            <>
+            <ThumbsUp size={15} />
+                Liked
+              </>
+      ) : (
+              <>
+              <ThumbsUp size={15} />
+                  Helpful {review.likes > 0 ? `(${review.likes})` : ''}
+              </>
+          )}
               </button>
             </div>
           </motion.div>
